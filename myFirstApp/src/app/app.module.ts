@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { HttpClientModule } from '@angular/common/http';
 import { MediaProvider } from '../providers/media/media';
 import { MediaService } from './services/media.service';
+import { DigitransitProvider } from '../providers/digitransit/digitransit';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MediaService } from './services/media.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MediaProvider,
     MediaService,
+    DigitransitProvider,
   ]
 })
 export class AppModule {}
