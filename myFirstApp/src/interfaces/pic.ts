@@ -3,4 +3,7 @@ export interface Pic {
      details: string,
      thumbnail: string,
      original: string,
+     description: string,
+     filename: string,
+
 }

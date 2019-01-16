@@ -29,7 +29,7 @@ import {MediaService} from '../../app/services/media.service';
 
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public http: HttpClient, public media:MediaService) {
+  constructor(public navCtrl: NavController, public http: HttpClient, private media:MediaService) {
     /*this.getImages();*/
     this.media.getAllMedia().subscribe((res:any) =>
      //  console.log(res));
