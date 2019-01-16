@@ -60,18 +60,19 @@ export class HomePage {
 
 
 
-  private url:string = 'assets/test.json';
+  //private url:string = 'assets/test.json';
+  private url:string='http://media.mw.metropolia.fi/wbma/media';
 
   private picArray;
   getImages(){
     this.http.get<Pic[]>(this.url).subscribe((res:any) =>
-     // console.log(res));
-      this.picArray = res);
+      console.log(res));
+    //this.picArray = res);
 
 
     //this.picArray = this.http.get<Pic[]>(this.url).subscribe((data: any) => this.picArray = data.data);
     //this.http.get<some_type>('example.json').subscribe((res: some_type) => this.someVariable = res.json());
-    console.log('clicked');
+    console.log('get images');
     //console.log(this.picArray);
   }
 
