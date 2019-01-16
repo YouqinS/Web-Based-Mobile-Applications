@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-//import { PhotoViewer } from '@ionic-native/photo-viewer'; , private photoViewer: PhotoViewer
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 
 class Pic {
@@ -21,7 +21,7 @@ class Pic {
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private photoViewer: PhotoViewer) {
 
   }
 
@@ -56,13 +56,13 @@ export class HomePage {
   ];
 
 
-/*
-showPhotoViewer(){
-  this.photoViewer.show('https://mysite.com/path/to/image.jpg');
 
-  this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
+showPhotoViewer(filepath:string){
+  this.photoViewer.show(filepath);
+
+  //this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
 }
-*/
+
 
 
 }
