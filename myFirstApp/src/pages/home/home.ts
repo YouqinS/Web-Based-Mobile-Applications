@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+import { Pic } from '../../interfaces/pic';
+import { stringify } from 'querystring';
 //import { PhotoViewer } from '@ionic-native/photo-viewer'; , private photoViewer: PhotoViewer
 
 
-class Pic {
+/*class Pic {
   constructor(
     public title: string,
     public details: string,
@@ -12,20 +16,22 @@ class Pic {
   ) {
   }
 
-}
+}*/
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, public http: HttpClient) {
+    this.getImages();
   }
 
 
+/*
   picArray: Pic[] = [
     {
       'title': 'Title 1',
@@ -47,22 +53,41 @@ export class HomePage {
       'original': 'http://placekitten.com/2039/1920',
     },
 
-    {
-      'title': 'Title 3',
-      'details': 'Phasellus imperdiet nunc tincidunt molestie vestibulum. Donec dictum suscipit nibh. Sed vel velit ante. Aenean quis viverra magna. Praesent eget cursus urna. Ut rhoncus interdum dolor non tincidunt. Sed vehicula consequat facilisis. Pellentesque pulvinar sem nisl, ac vestibulum erat rhoncus id. ',
-      'thumbnail': 'http://placekitten.com/319/301',
-      'original': 'http://placekitten.com/2039/1920',
-    },
+
   ];
-
-
-/*
-showPhotoViewer(){
-  this.photoViewer.show('https://mysite.com/path/to/image.jpg');
-
-  this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
-}
 */
+
+
+
+
+  private url:string = 'assets/test.json';
+
+  private picArray;
+  getImages(){
+    this.http.get<Pic[]>(this.url).subscribe((res:any) =>
+     // console.log(res));
+      this.picArray = res);
+
+
+    //this.picArray = this.http.get<Pic[]>(this.url).subscribe((data: any) => this.picArray = data.data);
+    //this.http.get<some_type>('example.json').subscribe((res: some_type) => this.someVariable = res.json());
+    console.log('clicked');
+    //console.log(this.picArray);
+  }
+
+
+
+
+
+
+
+  /*
+  showPhotoViewer(){
+    this.photoViewer.show('https://mysite.com/path/to/image.jpg');
+
+    this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
+  }
+  */
 
 
 }
