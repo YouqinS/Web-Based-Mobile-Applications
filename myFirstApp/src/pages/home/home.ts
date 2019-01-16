@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { Pic } from '../../interfaces/pic';
 import { stringify } from 'querystring';
+import { MediaProvider } from '../../providers/media/media';
+import {MediaService} from '../../app/services/media.service';
+
 //import { PhotoViewer } from '@ionic-native/photo-viewer'; , private photoViewer: PhotoViewer
 
 
@@ -26,8 +29,11 @@ import { stringify } from 'querystring';
 
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public http: HttpClient) {
-    this.getImages();
+  constructor(public navCtrl: NavController, public http: HttpClient, public media:MediaService) {
+    /*this.getImages();*/
+    this.media.getAllMedia().subscribe((res:any) =>
+     //  console.log(res));
+    this.picArray = res);
   }
 
 
@@ -62,22 +68,15 @@ export class HomePage {
 
   //private url:string = 'assets/test.json';
   private url:string='http://media.mw.metropolia.fi/wbma/media';
-
   private picArray;
-  getImages(){
+  /*getImages(){
     this.http.get<Pic[]>(this.url).subscribe((res:any) =>
       console.log(res));
     //this.picArray = res);
 
-
-    //this.picArray = this.http.get<Pic[]>(this.url).subscribe((data: any) => this.picArray = data.data);
     //this.http.get<some_type>('example.json').subscribe((res: some_type) => this.someVariable = res.json());
     console.log('get images');
-    //console.log(this.picArray);
-  }
-
-
-
+  }*/
 
 
 
