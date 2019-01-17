@@ -7,17 +7,6 @@ import { stringify } from 'querystring';
 //import { PhotoViewer } from '@ionic-native/photo-viewer'; , private photoViewer: PhotoViewer
 
 
-/*class Pic {
-  constructor(
-    public title: string,
-    public details: string,
-    public thumbnail: string,
-    public original: string,
-  ) {
-  }
-
-}*/
-
 
 @Component({
   selector: 'page-home',
@@ -42,7 +31,6 @@ export class HomePage {
     //this.http.get<some_type>('example.json').subscribe((res: some_type) => this.someVariable = res.json());
     console.log('clicked');
   }
-
 
 
 
