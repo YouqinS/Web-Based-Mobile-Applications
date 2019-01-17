@@ -9,10 +9,10 @@ export class MediaService {
 
   constructor(public http: HttpClient){}
 
-  private url:string='http://media.mw.metropolia.fi/wbma/media';
-  private picArray;
+  private url:string='http://media.mw.metropolia.fi/wbma/media?start=10&limit=5';
 
   getAllMedia(){
+
        return this.http.get<Pic[]>(this.url);
       //.subscribe((res:any) =>
        // console.log(res));

@@ -14,38 +14,16 @@
 
     <ion-item *ngFor="let item of picArray">
       <ion-thumbnail item-start="">
-        <!--<img [src]="item.thumbnail">-->
-        <img [src]="item.filename">
+        <img [src]= 'getThumbnail(item.filename)'>
       </ion-thumbnail>
 
       <h2>{{item.title}}</h2>
-      <p>{{item.details}}</p>
       <p>{{item.description}}</p>
 
       <!--<button ion-button clear item-end (click)="showPhotoViewer()">View</button>-->
     </ion-item>
 
   </ion-list>
-
-
-  <!--<ion-list>
-
-    <div class="grid-container">
-      <div class="image">
-        <img src="../../assets/imgs/ionic.png" class="thumb-img" imageViewer/>
-      </div>
-
-      <div class="img-description">
-        <h2>title</h2>
-        <p>this is a nice image</p>
-      </div>
-
-      <div class="btn-view">
-        <button>View</button>
-      </div>
-    </div>
-  </ion-list>
--->
 
 
 </ion-content>
