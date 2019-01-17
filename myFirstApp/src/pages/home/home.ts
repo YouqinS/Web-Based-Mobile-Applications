@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
-import { Pic } from '../../interfaces/pic';
+import { Media } from '../../interfaces/media';
 import { stringify } from 'querystring';
 //import { PhotoViewer } from '@ionic-native/photo-viewer'; , private photoViewer: PhotoViewer
 
@@ -23,27 +23,17 @@ export class HomePage {
 
 
   //private url:string = 'assets/test.json';
-  private url:string='http://media.mw.metropolia.fi/wbma/media';
+  private url:string='http://Media.mw.metropolia.fi/wbma/media';
 
-  private picArray:Pic[]=[];
+  private mediaArray:Media[]=[];
   getImages(){
-    this.http.get<Pic[]>(this.url).subscribe((res:any) =>
+    this.http.get<Media[]>(this.url).subscribe((res:any) =>
     //  console.log(res));
-    this.picArray = res);
+    this.mediaArray = res);
 
     //this.http.get<some_type>('example.json').subscribe((res: some_type) => this.someVariable = res.json());
     console.log('get images');
   }
-
-
-
-  /*
-  showPhotoViewer(){
-    this.photoViewer.show('https://mysite.com/path/to/image.jpg');
-
-    this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
-  }
-  */
 
 
 }
