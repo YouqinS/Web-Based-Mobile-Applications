@@ -23,7 +23,7 @@ export class HomePage {
 
 
   //private url:string = 'assets/test.json';
-  private url:string='http://Media.mw.metropolia.fi/wbma/media';
+  private url:string='http://Media.mw.metropolia.fi/wbma/media?start=10&limit=20';
 
   private mediaArray:Media[]=[];
   getImages(){
