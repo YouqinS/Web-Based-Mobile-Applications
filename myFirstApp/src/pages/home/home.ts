@@ -16,20 +16,26 @@ import { stringify } from 'querystring';
 export class HomePage {
 
   constructor(public navCtrl: NavController, private http: HttpClient) {
-    this.getImages();
+
   }
 
+  ngOnInit(){
+    this.getImages();
+  }
 
   private url:string = 'assets/test.json';
   private picArray;
 
   getImages(){
-    this.http.get<Pic[]>(this.url).subscribe((res:any) =>
-     // console.log(res));
-      this.picArray = res);
+    this.http.get<Pic[]>(this.url).subscribe(
+      (res:Pic[]) =>{
+        console.log(res);
+        this.picArray = res;
+      },
+      (error) => {console.log(error)}
+      );
 
     //this.http.get<some_type>('example.json').subscribe((res: some_type) => this.someVariable = res.json());
-    console.log('clicked');
   }
 
 
