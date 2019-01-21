@@ -60,7 +60,7 @@ export class HomePage {
 
 
 
-
+//get thumbnail by requesting single file and push it to picArray
     getAllFiles(){
 
       this.mediaProvider.getAllMedia().subscribe((res:Pic[])=>{
