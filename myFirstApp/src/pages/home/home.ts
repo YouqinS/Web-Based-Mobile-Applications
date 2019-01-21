@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
-import { Pic } from '../../interfaces/pic';
+import { Pic, Thumbnail } from '../../interfaces/pic';
 import { MediaProvider } from '../../providers/media/media';
 
 
@@ -12,7 +12,7 @@ import { MediaProvider } from '../../providers/media/media';
 
 export class HomePage {
 
-  private picArray:Pic[];
+  private picArray:Pic[] = [];
   public uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   constructor(public navCtrl: NavController, public http: HttpClient, private mediaProvider: MediaProvider) {
@@ -40,6 +40,7 @@ export class HomePage {
 
 
 //method 2: split && map
+/*
   getAllFiles(){
     this.mediaProvider.getAllMedia().subscribe((res:Pic[]) =>{
       console.log(res);
@@ -47,37 +48,47 @@ export class HomePage {
       this.picArray = res.map((pic:Pic)=>{
         const nameArray = pic.filename.split(".");
         pic.thumbnails = {
-          160: nameArray[0] + "-tn160.png",
+            nameArray[0] + "-tn160.png",
         };
         return pic;
       })
 
     });
   }
+*/
 
 
 
 
-  /*
+
     getAllFiles(){
 
       this.mediaProvider.getAllMedia().subscribe((res:Pic[])=>{
        // this.picArray = res;
 
+        res.forEach((pic:Pic) =>{
 
+          this.mediaProvider.getSingleMedia(pic.file_id).subscribe((res:Pic) =>{
+            this.picArray.push(res);
+
+        });
       })
-    }*/
+    })
+  }
 
- /* public getThumbnail(file){
-    let thumbnail:string;
+
+
+/*
+  public getThumbnail(file){
+    let thumbnails;
 
      this.mediaProvider.getSingleMedia(file.file_id).subscribe((res:Pic)=>{
-      thumbnail = "http://media.mw.metropolia.fi/wbma/uploads/" + res.thumbnails['160'];
-      console.log("thumbnail: " + thumbnail);
-       return thumbnail;
+      thumbnails = res.thumbnails;
+      console.log("thumbnail: " + thumbnails['160']);
+       return thumbnails;
     });
-
-  }*/
+  }
+*/
 
 
 }

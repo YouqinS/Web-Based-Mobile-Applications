@@ -24,8 +24,8 @@ export class MediaProvider {
   getSingleMedia(id){
     const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/"+id;
     console.log( "medial url : " + mediaURL );
-    let data =  this.http.get<Pic>(mediaURL);
-    return data;
+    return  this.http.get<Pic>(mediaURL);
+
   }
 
 
