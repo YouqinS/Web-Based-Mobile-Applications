@@ -7,6 +7,13 @@ export interface Pic {
   "user_id": number;
   "media_type": string;
   "mime_type": string;
-  "time_added": string;
+  time_added?: string;
+  thumbnails: Thumbnail;
 
+}
+
+export  interface Thumbnail {
+  160: string;
+  320?: string;
+  640?: string;
 }

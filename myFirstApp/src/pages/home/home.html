@@ -10,15 +10,13 @@
 
   <ion-list>
 
-    <!--<button (click)="media.getAllMedia()">view all</button>-->
-
-    <ion-item *ngFor="let item of picArray">
+    <ion-item *ngFor="let pic of picArray">
       <ion-thumbnail item-start="">
-        <img [src]= 'getThumbnail(item.filename)'>
+        <img [src]= "uploadUrl + pic.thumbnails['160']"> <!--'getThumbnail(pic.filename)'-->
       </ion-thumbnail>
 
-      <h2>{{item.title}}</h2>
-      <p>{{item.description}}</p>
+      <h2>{{pic.title}}</h2>
+      <p>{{pic.description}}</p>
 
       <!--<button ion-button clear item-end (click)="showPhotoViewer()">View</button>-->
     </ion-item>

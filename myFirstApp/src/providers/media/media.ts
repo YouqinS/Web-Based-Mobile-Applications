@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Pic } from '../../interfaces/pic';
 
 /*
   Generated class for the MediaProvider provider.
@@ -10,8 +11,23 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MediaProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello MediaProvider Provider');
+  constructor(public http: HttpClient) { }
+
+
+
+  getAllMedia(){
+    const url:string = 'http://media.mw.metropolia.fi/wbma/media?start=10&limit=5';
+    return this.http.get<Pic[]>(url);
   }
 
+
+  getSingleMedia(id){
+    const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/"+id;
+    console.log( "medial url : " + mediaURL );
+    let data =  this.http.get<Pic>(mediaURL);
+    return data;
+  }
+
+
 }
+
