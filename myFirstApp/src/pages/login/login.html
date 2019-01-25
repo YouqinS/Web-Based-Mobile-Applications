@@ -1,0 +1,90 @@
+
+<!--<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+    &lt;!&ndash;<ion-row>&ndash;&gt;
+      &lt;!&ndash;<ion-col>&ndash;&gt;
+        &lt;!&ndash;<ion-list > &lt;!&ndash;inset floating stacked&ndash;&gt;&ndash;&gt;
+
+          <ion-item>
+            <ion-input placeholder="username" name="username" id="loginField"
+                       type="text" required [(ngModel)]="username" #email></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="password" name="password" id="passwordField"
+                       type="password" required [(ngModel)]="password"></ion-input>
+          </ion-item>
+        &lt;!&ndash;</ion-list>&ndash;&gt;
+      &lt;!&ndash;</ion-col>&ndash;&gt;
+    &lt;!&ndash;</ion-row>&ndash;&gt;
+
+    <ion-row>
+
+      <ion-col>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        <button ion-button class="submit-btn" full type="submit"
+                [disabled]="!loginForm.form.valid">Login
+        </button>
+      </ion-col>
+
+    </ion-row>
+
+
+  </form>
+
+  <ion-row>
+    <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
+  </ion-row>
+
+
+
+</ion-content>-->
+
+
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+  <ion-row>
+      <ion-col>
+        <ion-list>
+
+          <ion-item>
+            <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.username" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    </ion-row>
+
+  </form>
+
+  <ion-row>
+    <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
+  </ion-row>
+
+</ion-content>

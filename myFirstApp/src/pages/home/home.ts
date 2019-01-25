@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Pic, Thumbnail } from '../../interfaces/pic';
 import { MediaProvider } from '../../providers/media/media';
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class HomePage {
 
           this.mediaProvider.getSingleMedia(pic.file_id).subscribe((res:Pic) =>{
             this.picArray.push(res);
+            console.log(this.picArray);
 
         });
       })
@@ -77,18 +79,14 @@ export class HomePage {
   }
 
 
+  // public logout() {
+  //   this.mediaProvider.logout().subscribe(succ => {
+  //     this.navCtrl.setRoot(LoginPage);
+  //     localStorage.removeItem('token');
+  //     this.mediaProvider.hasLoggedIn = false;
+  //   });
+  // }
 
-/*
-  public getThumbnail(file){
-    let thumbnails;
-
-     this.mediaProvider.getSingleMedia(file.file_id).subscribe((res:Pic)=>{
-      thumbnails = res.thumbnails;
-      console.log("thumbnail: " + thumbnails['160']);
-       return thumbnails;
-    });
-  }
-*/
 
 
 }

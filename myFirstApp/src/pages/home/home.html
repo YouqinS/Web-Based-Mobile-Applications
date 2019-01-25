@@ -13,16 +13,17 @@
     <ion-item *ngFor="let pic of picArray">
       <ion-thumbnail item-start="">
         <!--<img [src]= "uploadUrl + pic.thumbnails['160']">--> <!--'getThumbnail(pic.filename)'-->
-        <img [src]= "uploadUrl + pic.thumbnails['160']">
+        <img [src]= "uploadUrl + pic.thumbnails['w160']">
       </ion-thumbnail>
 
       <h2>{{pic.title}}</h2>
       <p>{{pic.description}}</p>
 
-      <!--<button ion-button clear item-end (click)="showPhotoViewer()">View</button>-->
+      <button ion-button clear item-end (click)="showPhotoViewer()">View</button>
     </ion-item>
 
   </ion-list>
 
+  <!--<button ion-button round end color="secondary" (click)="logout()">Logout</button>-->
 
 </ion-content>

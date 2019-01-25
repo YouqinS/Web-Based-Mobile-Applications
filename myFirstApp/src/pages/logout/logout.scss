@@ -1,0 +1,25 @@
+page-logout {
+
+    ion-card {
+      position: relative;
+      text-align: center;
+    }
+
+    .card-title {
+      position: absolute;
+      top: 10px;
+      font-size: 1.3em;
+      width: 100%;
+      font-weight: bold;
+      color: #ff9112;
+    }
+
+    .card-subtitle {
+      font-size: 1.0em;
+      position: absolute;
+      top: 40px;
+      width: 100%;
+      color: #ff9112;
+    }
+
+}
