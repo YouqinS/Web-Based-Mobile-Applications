@@ -26,22 +26,7 @@ export class MenuPage {
 
   ionViewDidLoad() {
    // console.log('ionViewDidLoad MenuPage');
-   // this.checkToken();
   }
-
-
-  public checkToken(){
-    this.mediaProvider.checkToken().subscribe(res =>{
-      console.log(' token? ' + res);
-      this.mediaProvider.hasLoggedIn = this.mediaProvider.token !== null && this.mediaProvider.token !== 'undefined';
-      if(this.mediaProvider.hasLoggedIn){
-        this.navCtrl.push(HomePage)
-      }else {
-        this.navCtrl.push(LoginPage)
-      }
-    })
-  }
-
-
+  
 }
 

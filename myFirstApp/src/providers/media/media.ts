@@ -39,14 +39,6 @@ public checkToken(){
 }
 
 
-  public userLogin(user:User){
-    const loginPath:string = "http://media.mw.metropolia.fi/wbma/login";
-    const httpOptions = {};
-    return this.http.post(loginPath, user);
-  }
-
-
-
 //login
   access: boolean;
   public login(credentials) {
@@ -76,49 +68,6 @@ public checkToken(){
 
 
 
-
-        /*// Store
-localStorage.setItem("lastname", "Smith");
-
-// Retrieve
-document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-*/
-
-  /*public login(credentials) {
-    const loginPath:string = "http://media.mw.metropolia.fi/wbma/login/";
-
-    if (credentials.username === null || credentials.password === null) {
-      return Observable.throw("Please enter credentials.");
-    } else {
-
-      return Observable.create(observer => {
-
-        this.http.post(loginPath, credentials)
-        .map(res => res.json())
-        .subscribe( data => {
-          if (data.access_token) {
-            this.token = 'Bearer ' + data.access_token;
-            this.access = true;
-          } else {
-            this.access = false;
-          }
-        });
-
-
-}
-
-      setTimeout(() => {
-        observer.next(this.access);
-      }, 500);
-
-      setTimeout(() => {
-        observer.complete();
-      }, 1000);
-
-
-    }, err => console.error(err));*/
-
-
   // Register
   public register(credentials) {
 
@@ -145,29 +94,6 @@ document.getElementById("result").innerHTML = localStorage.getItem("lastname");
       });
 
   }
-
-
-
-
-  // Logout
-  /*public  logout() {
-    return Observable.create(observer => {
-      localStorage.removeItem('token');
-      console.log('logout token ' + localStorage.getItem('token'));
-      this.token = localStorage.getItem('token');
-      this.hasLoggedIn = false;
-
-      observer.next(true);
-      observer.complete();
-    });
-  }*/
-
-/*
-  public logout(){
-    localStorage.removeItem('token');
-    console.log('logout token ' + this.token);
-    this.hasLoggedIn = false;
-  }*/
 
 
 }
