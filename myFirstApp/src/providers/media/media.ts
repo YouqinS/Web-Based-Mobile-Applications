@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pic } from '../../interfaces/pic';
 import { Observable } from 'rxjs';
@@ -30,25 +30,36 @@ export class MediaProvider {
   }
 
 
-public checkToken(){
-    return Observable.create(observer => {
-      this.token = localStorage.getItem('token');
-      observer.next(this.token);
-      observer.complete();
-    });
-}
 
-
-  public userLogin(user:User){
+  public login(user:User){
+    console.log('????????');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    };
     const loginPath:string = "http://media.mw.metropolia.fi/wbma/login";
-    const httpOptions = {};
-    return this.http.post(loginPath, user);
+    return this.http.post(loginPath, user, httpOptions);
   }
 
 
 
+  public register(user:User){
+    const registerUrl:string = "http://media.mw.metropolia.fi/wbma/users";
+    return  this.http.post(registerUrl, user);
+  }
+
+
+public checkUsername(username){
+    const usernameUrl:string = 'http://media.mw.metropolia.fi/wbma/users/username/'+username;
+    return this.http.get(usernameUrl, username);
+}
+
+
+
+
 //login
-  access: boolean;
+ /* access: boolean;
   public login(credentials) {
     const loginPath:string = "http://media.mw.metropolia.fi/wbma/login";
 
@@ -71,56 +82,11 @@ public checkToken(){
         });
 
       })
-  }
-
-
-
-
-
-        /*// Store
-localStorage.setItem("lastname", "Smith");
-
-// Retrieve
-document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-*/
-
-  /*public login(credentials) {
-    const loginPath:string = "http://media.mw.metropolia.fi/wbma/login/";
-
-    if (credentials.username === null || credentials.password === null) {
-      return Observable.throw("Please enter credentials.");
-    } else {
-
-      return Observable.create(observer => {
-
-        this.http.post(loginPath, credentials)
-        .map(res => res.json())
-        .subscribe( data => {
-          if (data.access_token) {
-            this.token = 'Bearer ' + data.access_token;
-            this.access = true;
-          } else {
-            this.access = false;
-          }
-        });
-
-
-}
-
-      setTimeout(() => {
-        observer.next(this.access);
-      }, 500);
-
-      setTimeout(() => {
-        observer.complete();
-      }, 1000);
-
-
-    }, err => console.error(err));*/
+  }*/
 
 
   // Register
-  public register(credentials) {
+  /*public register(credentials) {
 
     const registerUrl:string = "http://media.mw.metropolia.fi/wbma/users";
 
@@ -144,30 +110,10 @@ document.getElementById("result").innerHTML = localStorage.getItem("lastname");
 
       });
 
-  }
-
-
-
-
-  // Logout
-  /*public  logout() {
-    return Observable.create(observer => {
-      localStorage.removeItem('token');
-      console.log('logout token ' + localStorage.getItem('token'));
-      this.token = localStorage.getItem('token');
-      this.hasLoggedIn = false;
-
-      observer.next(true);
-      observer.complete();
-    });
   }*/
 
-/*
-  public logout(){
-    localStorage.removeItem('token');
-    console.log('logout token ' + this.token);
-    this.hasLoggedIn = false;
-  }*/
+
+
 
 
 }

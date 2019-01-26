@@ -39,25 +39,25 @@ export class LoginPage {
   }
 
 
-  loading: Loading;
-  loginCredentials = { username: '', password: '' };
 
+  public user:User = {};
 
-  public userLogin(){
+  public login(){
 
-    let user:User = {};
+    this.mediaProvider.login(this.user).subscribe(response =>{
 
-    this.mediaProvider.userLogin(user).subscribe(response =>{
+      console.log(this.user);
         console.log(response);
 
         if(response.hasOwnProperty('token')){
           localStorage.setItem("token", response['token']);
-          this.mediaProvider.hasLoggedIn = true;
-          this.navCtrl.setRoot(HomePage);
+          if(localStorage.getItem('token') !== 'undefined'){
+            this.mediaProvider.hasLoggedIn = true;
+            this.navCtrl.setRoot(HomePage);
+          }
         }else {
-
+          alert('login failed');
         }
-
     },
       error => {
       console.log(error);
@@ -67,7 +67,39 @@ export class LoginPage {
 
 
 
+public register(){
+    if(this.user.username !== null){
+      this.checkUsername();
+    }
+  this.mediaProvider.register(this.user).subscribe(response =>{
+    console.log(response);
 
+      if(response.hasOwnProperty('user_id')){
+        this.login();
+      }
+    },
+    error => {
+      console.log(error);
+    });
+}
+
+
+public checkUsername(){
+    console.log('checking username??');
+    this.mediaProvider.checkUsername(this.user.username).subscribe(response=>{
+      console.log(response);
+      console.log(response['username']);
+      console.log(response['available']);
+      if (response['available'] === false){
+        alert('username exists already!');
+        return;
+      }
+    })
+}
+
+
+  /*
+    loginCredentials = { username: '', password: '' };
   public login() {
     //this.showLoading();
 
@@ -91,11 +123,11 @@ export class LoginPage {
       console.log(error);
        // this.showError(error);
       });
-  }
+  }*/
 
 
-  registerCredentials = { username: '', email: '', password: '' };
-  public register() {
+ /*  registerCredentials = { username: '', email: '', password: '' };
+ public register() {
     this.mediaProvider.register(this.registerCredentials).subscribe(res => {
         console.log('register res: ' + res);
         if (res) {
@@ -110,26 +142,8 @@ export class LoginPage {
       error => {
         alert(error);
       });
-  }
-
-  showLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-      dismissOnPageChange: true
-    });
-    this.loading.present();
-  }
-
-  /*showError(text) {
-    this.loading.dismiss();
-
-    let alert = this.alertCtrl.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    alert.present();
   }*/
+
 
 
 }
