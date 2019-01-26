@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Pic } from '../../interfaces/pic';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
-import { LoginResponse } from '../../interfaces/loginResponse';
 import { LoginPage } from '../../pages/login/login';
 
 @Injectable()
@@ -33,17 +32,10 @@ export class MediaProvider {
 
 public checkToken(){
     return Observable.create(observer => {
-
-     // if(localStorage.hasOwnProperty('token')){
-      //  this.hasLoggedIn = true;      }
       this.token = localStorage.getItem('token');
-      if(this.token === 'undefined'){
-        observer.next(true);
-        observer.complete();
-      }
-
+      observer.next(this.token);
+      observer.complete();
     });
- // localStorage.getItem('token');
 }
 
 
@@ -60,38 +52,25 @@ public checkToken(){
   public login(credentials) {
     const loginPath:string = "http://media.mw.metropolia.fi/wbma/login";
 
-    if (credentials.username === null || credentials.password === null) {
-
-      return Observable.throw("Please enter credentials.");
-
-    } else {
-
       return Observable.create(observer => {
 
-        this.http.post(loginPath, credentials)
-          .subscribe(data => {
+        this.http.post(loginPath, credentials).subscribe(data => {
 
-            if (data.hasOwnProperty('token')) {
+            if (data.hasOwnProperty('token') && this.token !== 'undefined') {
               this.token = data['token'];
               console.log('token: ' + this.token);
               console.log('message: ' + data['message']);
-
              // alert(data['message']);
-
-              localStorage.setItem("token", this.token);
-
-              this.access = true;
-              this.hasLoggedIn = true;
-
+                localStorage.setItem("token", this.token);
+                this.access = true;
             } else {
               this.access = false;
-              this.hasLoggedIn = false;
-              observer.next(true);
-              observer.complete();
             }
-          });
+          observer.next(this.access);
+          observer.complete();
+        });
+
       })
-    }
   }
 
 
@@ -145,23 +124,26 @@ document.getElementById("result").innerHTML = localStorage.getItem("lastname");
 
     const registerUrl:string = "http://media.mw.metropolia.fi/wbma/users";
 
-    if (credentials.name === null || credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please enter credentials");
-    } else {
       return Observable.create(observer => {
 
-        this.http.post(registerUrl, credentials)
+        this.http.post(registerUrl, credentials).subscribe( data => {
 
-        .subscribe( data => {
           console.log(data);
+
+          if (data.hasOwnProperty('user_id')) {
+            console.log('user_id: ' + data['user_id']);
+            console.log('message: ' + data['message']);
+            // alert(data['message']);
+            this.access = true;
+          } else {
+            this.access = false;
+          }
+          observer.next(this.access);
+          observer.complete();
         });
 
-        observer.next(true);
-        observer.complete();
-
-        this.hasLoggedIn = true;
       });
-    }
+
   }
 
 
@@ -170,17 +152,23 @@ document.getElementById("result").innerHTML = localStorage.getItem("lastname");
   // Logout
   /*public  logout() {
     return Observable.create(observer => {
+      localStorage.removeItem('token');
+      console.log('logout token ' + localStorage.getItem('token'));
+      this.token = localStorage.getItem('token');
+      this.hasLoggedIn = false;
+
       observer.next(true);
       observer.complete();
     });
   }*/
 
+/*
   public logout(){
-
     localStorage.removeItem('token');
-    console.log('token' + this.token);
+    console.log('logout token ' + this.token);
     this.hasLoggedIn = false;
-  }
+  }*/
+
 
 }
 

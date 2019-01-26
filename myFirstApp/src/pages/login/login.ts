@@ -31,13 +31,16 @@ export class LoginPage {
     //console.log('ionViewDidLoad LoginPage');
   }
 
+  public showRegisterForm:Boolean = false;
   public createAccount() {
-    this.navCtrl.push('RegisterPage');
+    //this.navCtrl.push('RegisterPage');
+    this.showRegisterForm = true;
+    console.log('show register form');
   }
 
 
   loading: Loading;
-  registerCredentials = { username: '', password: '' };
+  loginCredentials = { username: '', password: '' };
 
 
   public userLogin(){
@@ -63,25 +66,49 @@ export class LoginPage {
   }
 
 
+
+
   public login() {
     //this.showLoading();
 
-    this.mediaProvider.login(this.registerCredentials).subscribe(success => {
-        if (success) {
+    this.mediaProvider.login(this.loginCredentials).subscribe(res => {
+
+        console.log(' login response:' + res);
+
+        if (res) {
+
+          this.mediaProvider.hasLoggedIn = true;
 
           this.navCtrl.setRoot(HomePage);
-         // this.navCtrl.push('HomePage');
-          this.navCtrl.popToRoot();
+         // this.navCtrl.push(HomePage);
 
-          console.log("why not showing home page")
-
-
-          } else {
-           this.showError("These credentials do not match our records.");
+        } else {
+          alert("These credentials do not match our records.");
+          // this.showError("These credentials do not match our records.");
       }
       },
       error => {
-        this.showError(error);
+      console.log(error);
+       // this.showError(error);
+      });
+  }
+
+
+  registerCredentials = { username: '', email: '', password: '' };
+  public register() {
+    this.mediaProvider.register(this.registerCredentials).subscribe(res => {
+        console.log('register res: ' + res);
+        if (res) {
+          this.loginCredentials = this.registerCredentials;
+          console.log(this.loginCredentials);
+          this.login();
+        } else {
+          alert("Error: Problem creating account.");
+        }
+      },
+
+      error => {
+        alert(error);
       });
   }
 
@@ -93,7 +120,7 @@ export class LoginPage {
     this.loading.present();
   }
 
-  showError(text) {
+  /*showError(text) {
     this.loading.dismiss();
 
     let alert = this.alertCtrl.create({
@@ -102,7 +129,7 @@ export class LoginPage {
       buttons: ['OK']
     });
     alert.present();
-  }
+  }*/
 
 
 }

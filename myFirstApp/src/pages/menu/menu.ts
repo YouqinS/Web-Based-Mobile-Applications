@@ -6,12 +6,6 @@ import { LogoutPage } from '../logout/logout';
 import { HomePage } from '../home/home';
 import { MediaProvider } from '../../providers/media/media';
 
-/**
- * Generated class for the MenuPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -32,14 +26,22 @@ export class MenuPage {
 
   ionViewDidLoad() {
    // console.log('ionViewDidLoad MenuPage');
-    this.checkToken();
+   // this.checkToken();
   }
 
+
   public checkToken(){
-    this.mediaProvider.checkToken().subscribe(success =>{
-      this.mediaProvider.hasLoggedIn = true;
-     // this.navCtrl.setRoot(HomePage);
-  })
+    this.mediaProvider.checkToken().subscribe(res =>{
+      console.log(' token? ' + res);
+      this.mediaProvider.hasLoggedIn = this.mediaProvider.token !== null && this.mediaProvider.token !== 'undefined';
+      if(this.mediaProvider.hasLoggedIn){
+        this.navCtrl.push(HomePage)
+      }else {
+        this.navCtrl.push(LoginPage)
+      }
+    })
   }
+
+
 }
 

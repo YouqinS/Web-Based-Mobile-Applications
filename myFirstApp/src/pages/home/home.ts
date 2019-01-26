@@ -68,25 +68,23 @@ export class HomePage {
        // this.picArray = res;
 
         res.forEach((pic:Pic) =>{
-
           this.mediaProvider.getSingleMedia(pic.file_id).subscribe((res:Pic) =>{
             this.picArray.push(res);
-            console.log(this.picArray);
-
         });
+      });
+        console.log(this.picArray);
       })
-    })
   }
 
 
-  // public logout() {
-  //   this.mediaProvider.logout().subscribe(succ => {
-  //     this.navCtrl.setRoot(LoginPage);
-  //     localStorage.removeItem('token');
-  //     this.mediaProvider.hasLoggedIn = false;
-  //   });
-  // }
-
+  /*public logout() {
+    this.mediaProvider.logout().subscribe(succ => {
+      this.navCtrl.setRoot(LoginPage);
+      localStorage.removeItem('token');
+      this.mediaProvider.hasLoggedIn = false;
+    });
+  }
+*/
 
 
 }
