@@ -26,6 +26,17 @@ export class MenuPage {
 
   ionViewDidLoad() {
    // console.log('ionViewDidLoad MenuPage');
+    this.checkToken();
+  }
+
+  public checkToken(){
+    this.mediaProvider.checkToken().subscribe(res=>{
+      console.log('check token: ' + res);
+      if(res){
+        this.navCtrl.setRoot(this.HomePage);
+      }
+
+    })
   }
 
 }

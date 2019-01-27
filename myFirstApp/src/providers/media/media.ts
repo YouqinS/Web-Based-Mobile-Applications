@@ -4,6 +4,7 @@ import { Pic } from '../../interfaces/pic';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { LoginPage } from '../../pages/login/login';
+import { observable } from 'rxjs/symbol/observable';
 
 @Injectable()
 export class MediaProvider {
@@ -30,7 +31,7 @@ export class MediaProvider {
   }
 
 
-
+//log in
   public login(user:User){
     console.log('????????');
     const httpOptions = {
@@ -43,19 +44,31 @@ export class MediaProvider {
   }
 
 
-
+//register new account
   public register(user:User){
     const registerUrl:string = "http://media.mw.metropolia.fi/wbma/users";
     return  this.http.post(registerUrl, user);
   }
 
-
+//check if a username exists already
 public checkUsername(username){
     const usernameUrl:string = 'http://media.mw.metropolia.fi/wbma/users/username/'+username;
     return this.http.get(usernameUrl, username);
 }
 
+//check whether a user has logged in/not logged out
+public checkToken(){
+    return Observable.create(observer=>{
+      console.log('checking token');
 
+    if(localStorage.getItem('token') != null && localStorage.getItem('token') != 'undefined'){
+      this.hasLoggedIn = true;
+    }
+      observer.next(this.hasLoggedIn);
+      observer.complete();
+  })
+
+}
 
 
 //login
