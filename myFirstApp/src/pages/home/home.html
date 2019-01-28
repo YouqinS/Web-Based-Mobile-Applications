@@ -10,13 +10,16 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let pic of picArray">
+    <ion-item *ngFor="let pic of mediaArray | async">
       <ion-thumbnail item-start="">
-        <!--<img [src]= "uploadUrl + pic.thumbnails['160']">--> <!--'getThumbnail(pic.filename)'-->
-        <img [src]= "uploadUrl + pic.thumbnails['w160']">
+        <!--<img [src]= "uploadUrl + pic.thumbnails.w160">--> <!--'getThumbnail(pic.filename)'--> <!--split string-->
+        <!--<img [src]= "uploadUrl + pic.thumbnails.w160" [alt]="pic.title" >--> <!--get thumbnail by requesting single file and push it to picArray-->
+        <!--<img [src]= "uploadUrl + (pic.file_id | thumbnail:'default' )" [alt]="pic.title" >--><!--impure pipe-->
+        <img [src]= "uploadUrl + (pic.file_id | thumbnail:'default' | async)" [alt]="pic.title" ><!--pure pipe-->
       </ion-thumbnail>
 
       <h2>{{pic.title}}</h2>
+      <p>{{pic.time_added | date: ('dd.MM.yy')}}</p>  <!--MM: month mm: minuit-->
       <p>{{pic.description}}</p>
 
       <button ion-button clear item-end (click)="showPhotoViewer()">View</button>
