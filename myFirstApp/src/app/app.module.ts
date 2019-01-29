@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MediaProvider } from '../providers/media/media';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
-import { LogoutPage } from '../pages/logout/logout';
+import { ProfilePage } from '../pages/profile/profile';
 import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
@@ -24,7 +24,7 @@ import { PipesModule } from '../pipes/pipes.module';
     HomePage,
     MenuPage,
     LoginPage,
-    LogoutPage,
+    ProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +37,7 @@ import { PipesModule } from '../pipes/pipes.module';
     MyApp,
     HomePage,
     MenuPage,
-    LogoutPage,
+    ProfilePage,
     LoginPage,
     //RegisterPage,
   ],

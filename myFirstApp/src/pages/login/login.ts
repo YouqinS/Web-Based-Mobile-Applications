@@ -46,14 +46,27 @@ export class LoginPage {
 
     this.mediaProvider.login(this.user).subscribe(response =>{
 
-      console.log(this.user);
-        console.log(response);
+      console.log('user: ', this.user);
+
+        console.log('login res: ', response);
 
         if(response.hasOwnProperty('token')){
           localStorage.setItem("token", response['token']);
+
           if(localStorage.getItem('token') !== 'undefined'){
             this.mediaProvider.hasLoggedIn = true;
             this.navCtrl.setRoot(HomePage);
+
+            this.user = response["user"];
+            console.log(response["user"]);
+            console.log(this.user.username);
+            console.log(this.user.email);
+
+            localStorage.setItem("username", this.user.username);
+            localStorage.setItem("useremail", this.user.email);
+
+            console.log('username2', localStorage.getItem('username'));
+
           }
         }else {
           alert('login failed');
@@ -75,6 +88,7 @@ public register(){
     console.log(response);
 
       if(response.hasOwnProperty('user_id')){
+        console.log(this.user.user_id);
         this.login();
       }
     },

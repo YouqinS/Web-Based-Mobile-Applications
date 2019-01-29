@@ -50,7 +50,7 @@ export class HomePage {
   getAllFiles(){
     this.mediaArray = this.mediaProvider.getAllMedia();
 
-      console.log(this.mediaArray);
+     // console.log(this.mediaArray);
 
   }
 
@@ -96,7 +96,7 @@ export class HomePage {
 
 
   /*public logout() {
-    this.mediaProvider.logout().subscribe(succ => {
+    this.mediaProvider.profile().subscribe(succ => {
       this.navCtrl.setRoot(LoginPage);
       localStorage.removeItem('token');
       this.mediaProvider.hasLoggedIn = false;

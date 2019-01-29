@@ -17,7 +17,7 @@ export class ThumbnailPipe implements PipeTransform {
   private thumbnail;
   private cachedId;
 
-  transform(file_id: number, ...args) {
+  async transform(file_id: number, ...args) {
 
     //console.log('...args', args[0]);
 

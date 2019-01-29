@@ -1,0 +1,31 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-item *ngFor="let pic of mediaArray | async">
+      <!--<ion-item>-->
+      <ion-thumbnail item-start="">
+        <img [src]= "uploadUrl + (pic.file_id | avatar | async)" [alt]="pic.title" ><!--pure pipe-->
+      <!--<img [src]= "uploadUrl + avatar" alt="avatar">-->
+      </ion-thumbnail>
+
+    </ion-item>
+
+    <h2>username: {{username}}</h2>
+    <h2>email: {{email}}</h2>
+  </ion-card>
+
+
+  <button ion-button round small color="secondary" (click)="logout()">Logout</button>
+
+</ion-content>
+<!--<ion-nav [root]="rootPage"></ion-nav>-->

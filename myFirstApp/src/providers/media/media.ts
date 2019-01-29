@@ -18,7 +18,9 @@ export class MediaProvider {
 
 
   getAllMedia(){
-    const url:string = 'http://media.mw.metropolia.fi/wbma/media?start=10&limit=5';
+   // const url:string = 'http://media.mw.metropolia.fi/wbma/media?start=10&limit=5';
+    const url:string = 'http://media.mw.metropolia.fi/wbma/media';
+
     return this.http.get<Pic[]>(url);
   }
 
@@ -28,6 +30,19 @@ export class MediaProvider {
    // console.log( "medial url : " + mediaURL );
     return  this.http.get<Pic>(mediaURL);
 
+  }
+
+  getAllMediaOfCurrentUser(user_id){
+    const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/user/"+user_id;
+    // console.log( "medial url : " + mediaURL );
+    return  this.http.get<Pic[]>(mediaURL);
+
+  }
+
+  getAllTagsOfOneFile(file_id){
+    const tagsUrl:string = 'http://media.mw.metropolia.fi/wbma/tags/file/'+file_id;
+    console.log('tagsUrl: ', tagsUrl);
+    return this.http.get(tagsUrl);
   }
 
 
@@ -54,6 +69,31 @@ public checkUsername(username){
     const usernameUrl:string = 'http://media.mw.metropolia.fi/wbma/users/username/'+username;
     return this.http.get(usernameUrl, username);
 }
+
+
+
+user:User;
+  userUrl: string = "http://media.mw.metropolia.fi/wbma/users/user";
+  public  accessToken:string;
+
+  public getCurrentUser(){
+    console.log('getting current user info?? ');
+
+    if(localStorage.getItem('token') != null && localStorage.getItem('token') != 'undefined'){
+      this.accessToken = localStorage.getItem('token');
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': this.accessToken
+      })
+    };
+
+    return this.http.get(this.userUrl, httpOptions);
+
+}
+
+
 
 //check whether a user has logged in/not logged out
 public checkToken(){

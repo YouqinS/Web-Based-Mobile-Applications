@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
-import { LogoutPage } from '../logout/logout';
+import { ProfilePage } from '../profile/profile';
 import { HomePage } from '../home/home';
 import { MediaProvider } from '../../providers/media/media';
 
@@ -15,18 +15,17 @@ import { MediaProvider } from '../../providers/media/media';
 export class MenuPage {
   LoginPage: any;
   HomePage: any;
-  LogoutPage: any;
+  ProfilePage: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider:MediaProvider) {
     this.LoginPage = LoginPage;
     this.HomePage = HomePage;
-    this.LogoutPage = LogoutPage;
+    this.ProfilePage = ProfilePage;
   }
 
   ionViewDidLoad() {
-   // console.log('ionViewDidLoad MenuPage');
-    this.checkToken();
+   // this.checkToken();
   }
 
   public checkToken(){
@@ -34,6 +33,8 @@ export class MenuPage {
       console.log('check token: ' + res);
       if(res){
         this.navCtrl.push(this.HomePage);
+        this.mediaProvider.hasLoggedIn = true;
+        console.log('token: ', localStorage.getItem('token'));
       }
 
     })
