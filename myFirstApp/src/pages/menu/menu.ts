@@ -25,14 +25,14 @@ export class MenuPage {
   }
 
   ionViewDidLoad() {
-   // this.checkToken();
+    this.checkToken();
   }
 
   public checkToken(){
     this.mediaProvider.checkToken().subscribe(res=>{
       console.log('check token: ' + res);
       if(res){
-        this.navCtrl.push(this.HomePage);
+       // this.navCtrl.push(this.HomePage);
         this.mediaProvider.hasLoggedIn = true;
         console.log('token: ', localStorage.getItem('token'));
       }

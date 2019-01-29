@@ -13,10 +13,10 @@
   <ion-card>
     <ion-item *ngFor="let pic of mediaArray | async">
       <!--<ion-item>-->
-      <ion-thumbnail item-start="">
+      <!--<ion-thumbnail item-start="">-->
         <img [src]= "uploadUrl + (pic.file_id | getTags | avatar:'small'| async)" [alt]="pic.title" ><!--pure pipe-->
       <!--<img [src]= "uploadUrl + avatar" alt="avatar">-->
-      </ion-thumbnail>
+      <!--</ion-thumbnail>-->
 
     </ion-item>
 
@@ -24,8 +24,8 @@
     <h2>email: {{email}}</h2>
   </ion-card>
 
-
-  <button ion-button round small color="secondary" (click)="logout()">Logout</button>
-
+  <div  text-center>
+    <button ion-button round default outline color="danger" item-start="end" (click)="logout()">Logout</button>
+  </div>
 </ion-content>
 <!--<ion-nav [root]="rootPage"></ion-nav>-->
