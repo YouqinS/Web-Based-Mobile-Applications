@@ -14,7 +14,7 @@
     <ion-item *ngFor="let pic of mediaArray | async">
       <!--<ion-item>-->
       <ion-thumbnail item-start="">
-        <img [src]= "uploadUrl + (pic.file_id | avatar | async)" [alt]="pic.title" ><!--pure pipe-->
+        <img [src]= "uploadUrl + (pic.file_id | getTags | avatar:'small'| async)" [alt]="pic.title" ><!--pure pipe-->
       <!--<img [src]= "uploadUrl + avatar" alt="avatar">-->
       </ion-thumbnail>
 

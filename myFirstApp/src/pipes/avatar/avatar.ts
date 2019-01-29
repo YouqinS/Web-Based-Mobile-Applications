@@ -16,36 +16,25 @@ export class AvatarPipe implements PipeTransform {
   }
 
 
-  transform(file_id: number, ...args) {
-    //pure pipe, promise
+  async transform(file_id_promise: Promise<number>, ...args) {
 
-    return new Promise((resolve, reject) => {
-      this.mediaProvider.getAllTagsOfOneFile(file_id).
-        subscribe((res: Tag[]) => {
-          console.log('getAllTagsOfOneFile', res);
+    return file_id_promise.then(file_id =>{
+      return new Promise((resolve, reject) => {
+        this.mediaProvider.getSingleMedia(file_id).subscribe((response) =>{
+          console.log('get Single Media Res', response);
 
-          res.forEach((tag: Tag) => {
-
-            if (tag.tag === 'profile') {
-              console.log('tag.file id ?', tag.file_id);
-              console.log('tag profile ?', tag.tag);
-              //resolve(tag.file_id);
-              //return this.tag_file_id;
-              this.mediaProvider.getSingleMedia(tag.file_id).subscribe(response=>{
-                resolve(response.thumbnails.w160);
-               /* switch (args[0]) {
-                  case 'large': resolve(response.thumbnails.w640); break;
-                  case 'medium': resolve(response.thumbnails.w320); break;
-                  case 'small': resolve(response.thumbnails.w160); break;
-                  case 'screenshot': resolve(response.screenshot); break;
-                  default: resolve(response.thumbnails.w160); break;
-                }*/
-              })
-            }
-
-          });
+          switch (args[0]) {
+            case 'large': resolve(response.thumbnails.w640); break;
+            case 'medium': resolve(response.thumbnails.w320); break;
+            case 'small': resolve(response.thumbnails.w160); break;
+            case 'screenshot': resolve(response.screenshot); break;
+            default: resolve(response.thumbnails.w160); break;
+          }
         })
-    });
+
+      })
+    })
+
 
   }
 }
