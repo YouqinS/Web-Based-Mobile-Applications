@@ -37,20 +37,12 @@
       <ion-input type="password" class="form-control"></ion-input>
     </ion-item>
 
-    <ion-item class="form-group">
-      <ion-label>Gender</ion-label>
-      <ion-select placeholder="Select Gender">
-        <option value="femail">Female</option>
-        <option value="mail">Male</option>
-        <!--<ion-select-option value="m">Male</ion-select-option>-->
-      </ion-select>
-    </ion-item>
 
     <div class="form-group">
       <label>Language</label>
       <label>
         <select class="form-control">
-          <option value="">Please select a language</option>
+          <option value="">select a language</option>
           <option *ngFor="let lang of langs" [value]="lang">
             {{lang}}
           </option>

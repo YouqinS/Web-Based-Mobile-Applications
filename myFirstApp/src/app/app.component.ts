@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from '../pages/signup/signup';
+import { SignupComponent } from '../components/signup/signup';
 
 @Component({
   templateUrl: 'app.html',
@@ -13,6 +14,7 @@ import { SignupPage } from '../pages/signup/signup';
 export class MyApp {
   //rootPage: any = HomePage;
   rootPage: any = SignupPage;
+  //rootPage: any = SignupComponent;
 
   constructor(
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -25,5 +27,6 @@ export class MyApp {
       console.log(error);
     });
   }
+
 }
 
