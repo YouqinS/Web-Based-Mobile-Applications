@@ -33,7 +33,9 @@ export class MenuPage {
     this.mediaProvider.checkToken().subscribe(res=>{
       console.log('check token: ' + res);
       if(res){
-        this.navCtrl.setRoot(this.HomePage);
+        //this.navCtrl.setRoot(this.HomePage);
+        //this.navCtrl.push(this.HomePage);
+        this.mediaProvider.hasLoggedIn = true;
       }
 
     })

@@ -1,55 +1,4 @@
 
-<!--<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Login
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-
-  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-    &lt;!&ndash;<ion-row>&ndash;&gt;
-      &lt;!&ndash;<ion-col>&ndash;&gt;
-        &lt;!&ndash;<ion-list > &lt;!&ndash;inset floating stacked&ndash;&gt;&ndash;&gt;
-
-          <ion-item>
-            <ion-input placeholder="username" name="username" id="loginField"
-                       type="text" required [(ngModel)]="username" #email></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input placeholder="password" name="password" id="passwordField"
-                       type="password" required [(ngModel)]="password"></ion-input>
-          </ion-item>
-        &lt;!&ndash;</ion-list>&ndash;&gt;
-      &lt;!&ndash;</ion-col>&ndash;&gt;
-    &lt;!&ndash;</ion-row>&ndash;&gt;
-
-    <ion-row>
-
-      <ion-col>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-        <button ion-button class="submit-btn" full type="submit"
-                [disabled]="!loginForm.form.valid">Login
-        </button>
-      </ion-col>
-
-    </ion-row>
-
-
-  </form>
-
-  <ion-row>
-    <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
-  </ion-row>
-
-
-
-</ion-content>-->
-
-
-
 <ion-header>
   <ion-navbar>
     <ion-title>
@@ -60,18 +9,16 @@
 
 <ion-content padding>
 
-  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" [hidden]="showRegisterForm" >
+  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" *ngIf="!showRegisterForm"> <!--[hidden]="showRegisterForm"-->
   <ion-row>
       <ion-col>
         <ion-list>
 
-          <ion-item>
-            <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
-          </ion-item>
+          <ion-label stacked>Username</ion-label>
+          <ion-input stacked type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
 
-          <ion-item>
-            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
-          </ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
 
         </ion-list>
       </ion-col>
@@ -84,42 +31,56 @@
   </form>
 
 
-  <ion-row [hidden]="showRegisterForm">
-    <button ion-button class="register-btn" clear block (click)="createAccount()">Create New Account</button>
+  <ion-row *ngIf="!showRegisterForm"> <!--[hidden]="showRegisterForm"-->
+    <button ion-button class="register-btn" clear block (click)="createAccount()">New user ?</button>
   </ion-row>
 
 
-  <form [hidden]="!showRegisterForm" (ngSubmit)="register()" #registerForm="ngForm" id="registerForm">
-    <ion-row>
-      <ion-col>
+  <form *ngIf="showRegisterForm" (ngSubmit)="register()" #registerForm="ngForm" id="registerForm"> <!--[hidden]="!showRegisterForm"-->
+
         <ion-list>
+          <div class="form-group"
+               [ngClass]="{
+          'has-danger': username?.invalid && (username?.dirty || username?.touched),
+          'has-success': username?.valid && (username?.dirty || username?.touched)}">
+            <ion-label stacked>Username</ion-label>
+            <ion-input type="text" class="form-control" placeholder="at least 3 letters (no numbers or special characters)" #username="ngModel" name="username" [(ngModel)]="user.username" required pattern="[A-Za-z] .{3,}" (ionBlur)="checkUsername()"></ion-input>
+          </div>
 
-          <ion-item>
-            <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required ></ion-input>
-          </ion-item>
+          <div class="form-group"
+               [ngClass]="{
+          'has-danger': email?.invalid && (email?.dirty || email?.touched),
+          'has-success': email?.valid && (email?.dirty || email?.touched) }">
+            <ion-label stacked>Email</ion-label>
+            <ion-input type="text" placeholder="example@email.com" name="email" [(ngModel)]="user.email" #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
 
-          <ion-item>
-            <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="user.email" ></ion-input>
-          </ion-item>
+            <div class="form-control-feedback"
+                 *ngIf="email.errors && (email.dirty || email.touched)">
+              <p *ngIf="email.errors.required">Email is required</p>
+              <p *ngIf="email.errors.pa">Email must contain at least the @ character</p>
+            </div>
+          </div>
 
-          <ion-item>
-            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
-          </ion-item>
 
-          <!-- <ion-item>
-             <ion-input type="password" placeholder="Confirm Password" name="confirmation_password" [(ngModel)]="registerCredentials.confirmation_password" required></ion-input>
-           </ion-item>-->
+          <ion-label stacked>Password</ion-label>
+          <ion-input type="password" placeholder="at least 8 characters of at least one number, one uppercase and lowercase letter" name="password" [(ngModel)]="user.password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></ion-input>
+
+          <ion-label stacked>Confirm Password</ion-label>
+          <ion-input type="password" placeholder="type password again" name="confirmation_password" [(ngModel)]="confirm_password" required (ionBlur)="verifyPassword()"></ion-input>
 
         </ion-list>
-      </ion-col>
-    </ion-row>
 
     <ion-row>
       <ion-col class="signup-col">
         <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Register</button>
       </ion-col>
     </ion-row>
-
   </form>
+  <!--<pre>{{registerForm.value | json}}</pre>-->
+
+
+  <ion-row *ngIf="showRegisterForm"> <!--[hidden]="showRegisterForm"-->
+    <button ion-button class="register-btn" clear block (click)="showLoginForm()">already have an account ?</button>
+  </ion-row>
 
 </ion-content>

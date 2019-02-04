@@ -33,7 +33,7 @@ export class MediaProvider {
 
 //log in
   public login(user:User){
-    console.log('????????');
+    console.log('log in?');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
@@ -69,64 +69,6 @@ public checkToken(){
   })
 
 }
-
-
-//login
- /* access: boolean;
-  public login(credentials) {
-    const loginPath:string = "http://media.mw.metropolia.fi/wbma/login";
-
-      return Observable.create(observer => {
-
-        this.http.post(loginPath, credentials).subscribe(data => {
-
-            if (data.hasOwnProperty('token') && this.token !== 'undefined') {
-              this.token = data['token'];
-              console.log('token: ' + this.token);
-              console.log('message: ' + data['message']);
-             // alert(data['message']);
-                localStorage.setItem("token", this.token);
-                this.access = true;
-            } else {
-              this.access = false;
-            }
-          observer.next(this.access);
-          observer.complete();
-        });
-
-      })
-  }*/
-
-
-  // Register
-  /*public register(credentials) {
-
-    const registerUrl:string = "http://media.mw.metropolia.fi/wbma/users";
-
-      return Observable.create(observer => {
-
-        this.http.post(registerUrl, credentials).subscribe( data => {
-
-          console.log(data);
-
-          if (data.hasOwnProperty('user_id')) {
-            console.log('user_id: ' + data['user_id']);
-            console.log('message: ' + data['message']);
-            // alert(data['message']);
-            this.access = true;
-          } else {
-            this.access = false;
-          }
-          observer.next(this.access);
-          observer.complete();
-        });
-
-      });
-
-  }*/
-
-
-
 
 
 }

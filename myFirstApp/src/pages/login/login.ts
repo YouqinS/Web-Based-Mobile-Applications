@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import {
   IonicPage,
   Loading,
@@ -10,6 +11,7 @@ import {
 import { MediaProvider } from '../../providers/media/media';
 import { HomePage } from '../home/home';
 import { User } from '../../interfaces/user';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -24,12 +26,30 @@ export class LoginPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
   ) {  }
+
+  model: any = {};
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad LoginPage');
   }
+
+
+  ngOnInit(){
+    const usernamePattern="[A-Za-z] .{3,}";
+    const emailPattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+    const passwordPattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+
+    this.registerForm = new FormGroup({
+      username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(emailPattern)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(passwordPattern)]),
+
+      // name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)]),
+    });
+  }
+
 
   public showRegisterForm:Boolean = false;
   public createAccount() {
@@ -37,12 +57,19 @@ export class LoginPage {
     this.showRegisterForm = true;
     console.log('show register form');
   }
-
+  showLoginForm() {
+    console.log('show login form');
+    if(this.showRegisterForm == true){
+      this.showRegisterForm = false
+    }
+  }
 
 
   public user:User = {};
+  public confirm_password: any;
+  registerForm;
 
-  public login(){
+public login(){
 
     this.mediaProvider.login(this.user).subscribe(response =>{
 
@@ -68,9 +95,6 @@ export class LoginPage {
 
 
 public register(){
-    if(this.user.username !== null){
-      this.checkUsername();
-    }
   this.mediaProvider.register(this.user).subscribe(response =>{
     console.log(response);
 
@@ -85,7 +109,7 @@ public register(){
 
 
 public checkUsername(){
-    console.log('checking username??');
+    console.log('checking username?');
     this.mediaProvider.checkUsername(this.user.username).subscribe(response=>{
       console.log(response);
       console.log(response['username']);
@@ -97,52 +121,13 @@ public checkUsername(){
     })
 }
 
-
-  /*
-    loginCredentials = { username: '', password: '' };
-  public login() {
-    //this.showLoading();
-
-    this.mediaProvider.login(this.loginCredentials).subscribe(res => {
-
-        console.log(' login response:' + res);
-
-        if (res) {
-
-          this.mediaProvider.hasLoggedIn = true;
-
-          this.navCtrl.setRoot(HomePage);
-         // this.navCtrl.push(HomePage);
-
-        } else {
-          alert("These credentials do not match our records.");
-          // this.showError("These credentials do not match our records.");
-      }
-      },
-      error => {
-      console.log(error);
-       // this.showError(error);
-      });
-  }*/
+public verifyPassword(){
+    if(this.user.password !== this.confirm_password){
+      alert('passwords do not match');
+    }
+}
 
 
- /*  registerCredentials = { username: '', email: '', password: '' };
- public register() {
-    this.mediaProvider.register(this.registerCredentials).subscribe(res => {
-        console.log('register res: ' + res);
-        if (res) {
-          this.loginCredentials = this.registerCredentials;
-          console.log(this.loginCredentials);
-          this.login();
-        } else {
-          alert("Error: Problem creating account.");
-        }
-      },
-
-      error => {
-        alert(error);
-      });
-  }*/
 
 
 
