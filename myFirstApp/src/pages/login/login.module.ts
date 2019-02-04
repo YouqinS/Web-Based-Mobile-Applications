@@ -25,4 +25,6 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
   ],
 })
-export class LoginPageModule {}
+export class LoginPageModule {
+
+}

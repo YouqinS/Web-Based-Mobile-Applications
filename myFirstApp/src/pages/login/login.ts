@@ -38,8 +38,7 @@ export class LoginPage {
 
   public user:User = {};
   public confirm_password: any;
-
-
+  @ViewChild('registerForm') registerForm: any;
 
   public showRegisterForm:Boolean = false;
   public createAccount() {
@@ -88,6 +87,8 @@ public register(){
 
       if(response.hasOwnProperty('user_id')){
         this.login();
+        console.log('reset form');
+        this.registerForm.reset();
       }
     },
     error => {
