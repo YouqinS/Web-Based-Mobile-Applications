@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { NgModule,
+  Component,
+  OnInit,
+  ViewChild } from '@angular/core';
 
 import {
   IonicPage,
@@ -8,6 +11,9 @@ import {
   NavParams,
   AlertController,
 } from 'ionic-angular';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
 import { MediaProvider } from '../../providers/media/media';
 import { HomePage } from '../home/home';
 import { User } from '../../interfaces/user';
@@ -29,26 +35,10 @@ export class LoginPage {
               private loadingCtrl: LoadingController,
   ) {  }
 
-  model: any = {};
 
-  ionViewDidLoad() {
-    //console.log('ionViewDidLoad LoginPage');
-  }
+  public user:User = {};
+  public confirm_password: any;
 
-
-  ngOnInit(){
-    const usernamePattern="[A-Za-z] .{3,}";
-    const emailPattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
-    const passwordPattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
-
-    this.registerForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.pattern(emailPattern)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(passwordPattern)]),
-
-      // name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)]),
-    });
-  }
 
 
   public showRegisterForm:Boolean = false;
@@ -65,9 +55,7 @@ export class LoginPage {
   }
 
 
-  public user:User = {};
-  public confirm_password: any;
-  registerForm;
+
 
 public login(){
 

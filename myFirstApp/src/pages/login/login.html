@@ -36,34 +36,65 @@
   </ion-row>
 
 
-  <form *ngIf="showRegisterForm" (ngSubmit)="register()" #registerForm="ngForm" id="registerForm"> <!--[hidden]="!showRegisterForm"-->
+  <form *ngIf="showRegisterForm" (ngSubmit)="register()" name="registerForm" #registerForm="ngForm" id="registerForm"> <!--[hidden]="!showRegisterForm"-->
 
         <ion-list>
-          <div class="form-group"
-               [ngClass]="{
-          'has-danger': username?.invalid && (username?.dirty || username?.touched),
-          'has-success': username?.valid && (username?.dirty || username?.touched)}">
+          <div class="form-group">
             <ion-label stacked>Username</ion-label>
-            <ion-input type="text" class="form-control" placeholder="at least 3 letters (no numbers or special characters)" #username="ngModel" name="username" [(ngModel)]="user.username" required pattern="[A-Za-z] .{3,}" (ionBlur)="checkUsername()"></ion-input>
+            <ion-input type="text"
+                       class="form-control"
+                       name="username"
+                       id="username"
+                       required
+                       pattern="[A-Za-z]{3,}"
+                       minlength="3"
+                       placeholder="at least 3 letters (no numbers or special characters)"
+                       [(ngModel)]="user.username"
+                       #username="ngModel"
+                       (ionBlur)="checkUsername()"></ion-input>
+            <div class="form-control-feedback"
+                 *ngIf="username.errors && (username.dirty || username.touched)">
+              <p *ngIf="username.errors">Username is required and needs to be at least 3 letters (no numbers or special characters)</p>
+            </div>
+
           </div>
 
-          <div class="form-group"
-               [ngClass]="{
-          'has-danger': email?.invalid && (email?.dirty || email?.touched),
-          'has-success': email?.valid && (email?.dirty || email?.touched) }">
-            <ion-label stacked>Email</ion-label>
-            <ion-input type="text" placeholder="example@email.com" name="email" [(ngModel)]="user.email" #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
 
+          <div class="form-group">
+            <ion-label stacked>Email</ion-label>
+            <ion-input type="text"
+                       class="form-control"
+                       placeholder="example@email.com"
+                       name="email"
+                       id="email"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       [(ngModel)]="user.email"
+                       #email="ngModel"
+                       required ></ion-input>
             <div class="form-control-feedback"
                  *ngIf="email.errors && (email.dirty || email.touched)">
-              <p *ngIf="email.errors.required">Email is required</p>
-              <p *ngIf="email.errors.pa">Email must contain at least the @ character</p>
+              <p *ngIf="email.errors">Email format: example@email.com</p>
             </div>
+
           </div>
 
 
+          <div class="form-group">
           <ion-label stacked>Password</ion-label>
-          <ion-input type="password" placeholder="at least 8 characters of at least one number, one uppercase and lowercase letter" name="password" [(ngModel)]="user.password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></ion-input>
+          <ion-input type="password"
+                     placeholder="at least 8 characters of at least one number, one uppercase and lowercase letter"
+                     name="password"
+                     id="password"
+                     [(ngModel)]="user.password"
+                     #password="ngModel"
+                     required
+                     pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></ion-input>
+            <div class="form-control-feedback"
+                 *ngIf="password.errors && (password.dirty || password.touched)">
+              <p *ngIf="password.errors">Password needs to be at least 8 characters containing at least one number, one uppercase and lowercase letter</p>
+            </div>
+
+          </div>
 
           <ion-label stacked>Confirm Password</ion-label>
           <ion-input type="password" placeholder="type password again" name="confirmation_password" [(ngModel)]="confirm_password" required (ionBlur)="verifyPassword()"></ion-input>
@@ -76,7 +107,7 @@
       </ion-col>
     </ion-row>
   </form>
-  <!--<pre>{{registerForm.value | json}}</pre>-->
+
 
 
   <ion-row *ngIf="showRegisterForm"> <!--[hidden]="showRegisterForm"-->
@@ -84,3 +115,5 @@
   </ion-row>
 
 </ion-content>
+
+
