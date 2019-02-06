@@ -30,7 +30,6 @@ export class MenuPage {
   }
 
   public checkToken(){
-      console.log('ionViewDidLoad MenuPage');
       console.log(localStorage.getItem('token'));
       if (localStorage.getItem('token') !== null) {
         this.mediaProvider.checkToken().subscribe((user: User) => {
@@ -40,6 +39,8 @@ export class MenuPage {
       }
   }
 
+  
+  
   /*public checkToken(){
     this.mediaProvider.checkToken().subscribe(res=>{
       console.log('check token: ' + res);
@@ -47,10 +48,7 @@ export class MenuPage {
        // this.navCtrl.push(this.HomePage);
         this.mediaProvider.hasLoggedIn = true;
         console.log('token: ', localStorage.getItem('token'));
-
-
       }
-
     })
   }*/
 
