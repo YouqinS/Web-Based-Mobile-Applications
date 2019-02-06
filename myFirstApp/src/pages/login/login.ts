@@ -67,7 +67,8 @@ public login(){
           localStorage.setItem("token", response['token']);
           if(localStorage.getItem('token') !== 'undefined'){
             this.mediaProvider.hasLoggedIn = true;
-            this.navCtrl.setRoot(HomePage);
+            //this.navCtrl.setRoot(HomePage);
+            this.navCtrl.push(HomePage);
           }
         }else {
           alert('login failed');

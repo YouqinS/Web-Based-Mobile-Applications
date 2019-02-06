@@ -16,6 +16,7 @@ import { MediaProvider } from '../providers/media/media';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
+import { Upload_1Page } from '../pages/upload-1/upload-1';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LogoutPage } from '../pages/logout/logout';
     MenuPage,
     LoginPage,
     LogoutPage,
+    Upload_1Page
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { LogoutPage } from '../pages/logout/logout';
     LogoutPage,
     LoginPage,
     //RegisterPage,
+    Upload_1Page,
   ],
   providers: [
     StatusBar,

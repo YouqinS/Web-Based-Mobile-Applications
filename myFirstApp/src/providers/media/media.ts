@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pic } from '../../interfaces/pic';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { LoginPage } from '../../pages/login/login';
 import { observable } from 'rxjs/symbol/observable';
+import { LoginResponse } from '../../interfaces/loginResponse';
 
 @Injectable()
 export class MediaProvider {
@@ -27,7 +28,6 @@ export class MediaProvider {
     const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/"+id;
     console.log( "medial url : " + mediaURL );
     return  this.http.get<Pic>(mediaURL);
-
   }
 
 
@@ -69,6 +69,35 @@ public checkToken(){
   })
 
 }
+
+//upload media file
+public uploadMedia(data:any){
+  console.log('upload media ?');
+
+  let accessToken = localStorage.getItem('token');
+     console.log('accessToken: ', accessToken);
+
+  const httpOptions = {
+    headers: new HttpHeaders({
+      //'Content-type': 'application/json',
+      'x-access-token': accessToken
+    }),
+  };
+  const uploadPath:string = "http://media.mw.metropolia.fi/wbma/media";
+  return this.http.post<LoginResponse>(uploadPath, data, httpOptions);
+}
+
+
+
+ /* upload(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<LoginResponse>(this.mediaAPI + 'media',
+      data, httpOptions);
+  }*/
 
 
 }

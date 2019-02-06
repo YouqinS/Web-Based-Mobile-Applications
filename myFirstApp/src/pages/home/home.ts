@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Pic, Thumbnail } from '../../interfaces/pic';
 import { MediaProvider } from '../../providers/media/media';
 import { LoginPage } from '../login/login';
-
+import {Upload_1Page } from '../upload-1/upload-1';
 
 @Component({
   selector: 'page-home',
@@ -86,5 +86,7 @@ export class HomePage {
   }
 */
 
-
+  goToUploadPage() {
+    this.navCtrl.push(Upload_1Page);
+  }
 }

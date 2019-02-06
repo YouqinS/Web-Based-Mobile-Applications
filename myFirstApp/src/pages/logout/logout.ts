@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { LoginPage } from '../login/login';
 import { MenuPage } from '../menu/menu';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LogoutPage page.
@@ -28,12 +29,14 @@ export class LogoutPage {
 
   public logout(){
 
-    this.navCtrl.setRoot(LoginPage);
-
     localStorage.removeItem('token');
-    console.log('logout token ' + localStorage.getItem('token'));
+
     this.mediaProvider.token = localStorage.getItem('token');
+    console.log('logout token ' + localStorage.getItem('token'));
     this.mediaProvider.hasLoggedIn = false;
+
+    //this.navCtrl.push(LoginPage);
+    this.navCtrl.setRoot(LoginPage);
 
   }
 
