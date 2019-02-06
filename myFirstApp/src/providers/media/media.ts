@@ -11,7 +11,7 @@ export class MediaProvider {
 
   public hasLoggedIn:Boolean = false;
   token: string;
-
+  user:User = null;
 
   constructor(public http: HttpClient) { }
 
@@ -32,18 +32,6 @@ export class MediaProvider {
 
   }
 
-  getAllMediaOfCurrentUser(user_id){
-    const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/user/"+user_id;
-    // console.log( "medial url : " + mediaURL );
-    return  this.http.get<Pic[]>(mediaURL);
-
-  }
-
-  getAllTagsOfOneFile(file_id){
-    const tagsUrl:string = 'http://media.mw.metropolia.fi/wbma/tags/file/'+file_id;
-    console.log('tagsUrl: ', tagsUrl);
-    return this.http.get(tagsUrl);
-  }
 
 
 //log in
@@ -64,6 +52,7 @@ export class MediaProvider {
     return  this.http.post(registerUrl, user);
   }
 
+
 //check if a username exists already
 public checkUsername(username){
     const usernameUrl:string = 'http://media.mw.metropolia.fi/wbma/users/username/'+username;
@@ -71,32 +60,31 @@ public checkUsername(username){
 }
 
 
+  getFilesByTag(tag) {
+    // single file
+    const tagUrl: string = "http://media.mw.metropolia.fi/wbma/tags/"+tag;
+    return this.http.get<Pic[]>(tagUrl);
+  }
 
-user:User;
-  userUrl: string = "http://media.mw.metropolia.fi/wbma/users/user";
-  public  accessToken:string;
+//check whether a user has logged in/not logged out
 
-  public getCurrentUser(){
-    console.log('getting current user info?? ');
-
-    if(localStorage.getItem('token') != null && localStorage.getItem('token') != 'undefined'){
-      this.accessToken = localStorage.getItem('token');
-    }
+  checkToken() {
+    const userUrl: string = "http://media.mw.metropolia.fi/wbma/users/user";
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'x-access-token': this.accessToken
-      })
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
     };
-
-    return this.http.get(this.userUrl, httpOptions);
-
-}
+    return this.http.get<User>(userUrl, httpOptions);
+  }
 
 
 
-//check whether a user has logged in/not logged out
-public checkToken(){
+
+
+/*public checkToken(){
     return Observable.create(observer=>{
       console.log('checking token');
 
@@ -107,13 +95,39 @@ public checkToken(){
       observer.complete();
   })
 
-}
+}*/
 
 
 
 
+  /* getAllMediaOfCurrentUser(user_id){
+     const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/user/"+user_id;
+     // console.log( "medial url : " + mediaURL );
+     return  this.http.get<Pic[]>(mediaURL);
+   }*/
 
+  /*getAllTagsOfOneFile(file_id){
+    const tagsUrl:string = 'http://media.mw.metropolia.fi/wbma/tags/file/'+file_id;
+    console.log('tagsUrl: ', tagsUrl);
+    return this.http.get(tagsUrl);
+  }*/
 
+  /* public getCurrentUser(){
+        console.log('getting current user info?? ');
+
+        if(localStorage.getItem('token') != null && localStorage.getItem('token') != 'undefined'){
+          this.accessToken = localStorage.getItem('token');
+        }
+
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'x-access-token': this.accessToken
+          })
+        };
+
+        return this.http.get<User>(this.userUrl, httpOptions);
+
+    }*/
 
 }
 

@@ -1,16 +1,48 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { MediaProvider } from '../../providers/media/media';
-import { Tag } from '../../interfaces/pic';
+import { Pic, Tag } from '../../interfaces/pic';
+import { ProfilePage } from '../../pages/profile/profile';
 
-/**
- * Generated class for the GetTagsPipe pipe.
- *
- * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
- */
 @Pipe({
   name: 'getTags',
 })
+
 export class GetTagsPipe implements PipeTransform {
+  constructor(public mediaProvider: MediaProvider, public profilePage:ProfilePage) {
+
+  }
+
+  async transform(tag: string) {
+    return new Promise((resolve, reject) => {
+      this.mediaProvider.getFilesByTag(tag).subscribe((files: Pic[]) => {
+        console.log('getFilesByTag res: ', files);
+
+         let profileFound:Boolean = false;
+        files.forEach((file: Pic) => {
+          if (file.user_id === this.mediaProvider.user.user_id) {
+            profileFound = true;
+            resolve(file.file_id);
+          }
+          else {
+            console.log("profile not found: " + file.user_id + '/' + this.mediaProvider.user.user_id);
+            //reject('No profile image added.');
+          }
+        });
+        if(!profileFound){
+          reject('No profile image added.');
+        }
+
+      });
+    });
+  }
+}
+
+
+
+
+
+
+/*export class GetTagsPipe implements PipeTransform {
 
   constructor(private mediaProvider: MediaProvider) {}
 
@@ -28,16 +60,6 @@ export class GetTagsPipe implements PipeTransform {
               console.log('tag profile ?', tag.tag);
               resolve(tag.file_id);
 
-              /*   this.mediaProvider.getSingleMedia(tag.file_id).subscribe(response=>{
-                   resolve(response.thumbnails.w160);
-                   /!* switch (args[0]) {
-                      case 'large': resolve(response.thumbnails.w640); break;
-                      case 'medium': resolve(response.thumbnails.w320); break;
-                      case 'small': resolve(response.thumbnails.w160); break;
-                      case 'screenshot': resolve(response.screenshot); break;
-                      default: resolve(response.thumbnails.w160); break;
-                    }*!/
-                 })*/
             }
 
           });
@@ -47,4 +69,4 @@ export class GetTagsPipe implements PipeTransform {
   }
 
 
-}
+}*/

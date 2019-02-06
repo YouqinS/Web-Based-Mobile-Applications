@@ -21,6 +21,7 @@ export class AvatarPipe implements PipeTransform {
     return file_id_promise.then(file_id =>{
       return new Promise((resolve, reject) => {
         this.mediaProvider.getSingleMedia(file_id).subscribe((response) =>{
+
           console.log('get Single Media Res', response);
 
           switch (args[0]) {

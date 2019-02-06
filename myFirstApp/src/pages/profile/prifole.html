@@ -8,24 +8,37 @@
 </ion-header>
 
 
-<ion-content padding>
+  <ion-content class="card-background-page">
+    <ion-card>
+      <img [src]="uploadUrl + ('profile' | getTags | async| thumbnail:'large' | async)"/>
 
-  <ion-card>
-    <ion-item *ngFor="let pic of mediaArray | async">
-      <!--<ion-item>-->
-      <!--<ion-thumbnail item-start="">-->
-        <img [src]= "uploadUrl + (pic.file_id | getTags | avatar:'small'| async)" [alt]="pic.title" ><!--pure pipe-->
-      <!--<img [src]= "uploadUrl + avatar" alt="avatar">-->
-      <!--</ion-thumbnail>-->
+      <div class="card-title">
+        username: {{mediaProvider.user.username}}
+      </div>
+      <!--<div class="card-subtitle">
+        {{ mediaProvider.user.full_name}}
+      </div>-->
+      <div class="card-subtitle">
+        email: {{mediaProvider.user.email}}
+      </div>
 
-    </ion-item>
-
-    <h2>username: {{username}}</h2>
-    <h2>email: {{email}}</h2>
-  </ion-card>
+    </ion-card>
 
   <div  text-center>
     <button ion-button round default outline color="danger" item-start="end" (click)="logout()">Logout</button>
   </div>
 </ion-content>
+
+
 <!--<ion-nav [root]="rootPage"></ion-nav>-->
+<!--<ion-card>
+   <ion-item *ngFor="let pic of mediaArray | async">
+
+       <img [src]= "uploadUrl + (pic.file_id | getTags | avatar:'small'| async)" [alt]="pic.title" >&lt;!&ndash;pure pipe&ndash;&gt;
+
+
+   </ion-item>
+
+   <h2>username: {{username}}</h2>
+   <h2>email: {{email}}</h2>
+ </ion-card>-->
