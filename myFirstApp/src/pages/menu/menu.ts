@@ -30,7 +30,6 @@ export class MenuPage {
   }
 
   public checkToken(){
-      console.log('ionViewDidLoad MenuPage');
       console.log(localStorage.getItem('token'));
       if (localStorage.getItem('token') !== null) {
         this.mediaProvider.checkToken().subscribe((user: User) => {
