@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { LoginPage } from '../../pages/login/login';
 import { observable } from 'rxjs/symbol/observable';
+import { LoginResponse } from '../../interfaces/loginResponse';
 
 @Injectable()
 export class MediaProvider {
@@ -82,52 +83,23 @@ public checkUsername(username){
 
 
 
+//upload media file
+  public uploadMedia(data:any){
+    console.log('upload media ?');
 
+    let accessToken = localStorage.getItem('token');
+    console.log('accessToken: ', accessToken);
 
-/*public checkToken(){
-    return Observable.create(observer=>{
-      console.log('checking token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        //'Content-type': 'application/json',
+        'x-access-token': accessToken
+      }),
+    };
+    const uploadPath:string = "http://media.mw.metropolia.fi/wbma/media";
+    return this.http.post<LoginResponse>(uploadPath, data, httpOptions);
+  }
 
-    if(localStorage.getItem('token') != null && localStorage.getItem('token') != 'undefined'){
-      this.hasLoggedIn = true;
-    }
-      observer.next(this.hasLoggedIn);
-      observer.complete();
-  })
-
-}*/
-
-
-
-
-  /* getAllMediaOfCurrentUser(user_id){
-     const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/user/"+user_id;
-     // console.log( "medial url : " + mediaURL );
-     return  this.http.get<Pic[]>(mediaURL);
-   }*/
-
-  /*getAllTagsOfOneFile(file_id){
-    const tagsUrl:string = 'http://media.mw.metropolia.fi/wbma/tags/file/'+file_id;
-    console.log('tagsUrl: ', tagsUrl);
-    return this.http.get(tagsUrl);
-  }*/
-
-  /* public getCurrentUser(){
-        console.log('getting current user info?? ');
-
-        if(localStorage.getItem('token') != null && localStorage.getItem('token') != 'undefined'){
-          this.accessToken = localStorage.getItem('token');
-        }
-
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'x-access-token': this.accessToken
-          })
-        };
-
-        return this.http.get<User>(this.userUrl, httpOptions);
-
-    }*/
 
 }
 

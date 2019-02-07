@@ -28,6 +28,13 @@ export class HomePage {
   }
 
 
+//using pipe
+  getAllFiles(){
+    this.mediaArray = this.mediaProvider.getAllMedia();
+
+    // console.log(this.mediaArray);
+
+  }
 
 
 //get thumbnail by requesting single file and push it to picArray
@@ -44,18 +51,6 @@ export class HomePage {
         console.log(this.picArray);
       })
   }*/
-
-
-  //using pipe
-  getAllFiles(){
-    this.mediaArray = this.mediaProvider.getAllMedia();
-
-     // console.log(this.mediaArray);
-
-  }
-
-
-
 
 
   //method 1: split
@@ -94,15 +89,6 @@ export class HomePage {
   */
 
 
-
-  /*public logout() {
-    this.mediaProvider.profile().subscribe(succ => {
-      this.navCtrl.setRoot(LoginPage);
-      localStorage.removeItem('token');
-      this.mediaProvider.hasLoggedIn = false;
-    });
-  }
-*/
 
 
 }
