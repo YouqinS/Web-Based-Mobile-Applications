@@ -20,45 +20,10 @@ export class HomePage {
   }
 
   ngOnInit(){
-    this.getAllFiles();
+
+      this.getAllFiles();
 
   }
-
-  //method 1: split
-  /*private thumbnail: string;
-    private mediaPath:string = "http://media.mw.metropolia.fi/wbma/uploads/";
-    public getThumbnail(filename){
-    return this.thumbnail = this.mediaPath + filename.split(".",1) + "-tn160.png";
-    //console.log("thumbnail: " + this.thumbnail);
-  }*/
-
-/*  getAllFiles(){
-    this.mediaProvider.getAllMedia().subscribe((res:Pic[]) =>{
-      console.log(res);
-      this.picArray = res;
-    });
-  }*/
-
-
-//method 2: split && map
-/*
-  getAllFiles(){
-    this.mediaProvider.getAllMedia().subscribe((res:Pic[]) =>{
-      console.log(res);
-
-      this.picArray = res.map((pic:Pic)=>{
-        const nameArray = pic.filename.split(".");
-        pic.thumbnails = {
-            nameArray[0] + "-tn160.png",
-        };
-        return pic;
-      })
-
-    });
-  }
-*/
-
-
 
 
 //get thumbnail by requesting single file and push it to picArray
@@ -75,6 +40,42 @@ export class HomePage {
         console.log(this.picArray);
       })
   }
+
+
+  //method 1: split
+  /*private thumbnail: string;
+    private mediaPath:string = "http://media.mw.metropolia.fi/wbma/uploads/";
+    public getThumbnail(filename){
+    return this.thumbnail = this.mediaPath + filename.split(".",1) + "-tn160.png";
+    //console.log("thumbnail: " + this.thumbnail);
+  }*/
+
+  /*  getAllFiles(){
+      this.mediaProvider.getAllMedia().subscribe((res:Pic[]) =>{
+        console.log(res);
+        this.picArray = res;
+      });
+    }*/
+
+
+//method 2: split && map
+  /*
+    getAllFiles(){
+      this.mediaProvider.getAllMedia().subscribe((res:Pic[]) =>{
+        console.log(res);
+
+        this.picArray = res.map((pic:Pic)=>{
+          const nameArray = pic.filename.split(".");
+          pic.thumbnails = {
+              nameArray[0] + "-tn160.png",
+          };
+          return pic;
+        })
+
+      });
+    }
+  */
+
 
 
   /*public logout() {

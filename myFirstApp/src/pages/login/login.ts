@@ -33,7 +33,6 @@ export class LoginPage {
 
   public showRegisterForm:Boolean = false;
   public createAccount() {
-    //this.navCtrl.push('RegisterPage');
     this.showRegisterForm = true;
     console.log('show register form');
   }
@@ -68,9 +67,6 @@ export class LoginPage {
 
 
 public register(){
-    if(this.user.username !== null){
-      this.checkUsername();
-    }
   this.mediaProvider.register(this.user).subscribe(response =>{
     console.log(response);
 

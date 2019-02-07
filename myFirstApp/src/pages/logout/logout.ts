@@ -4,12 +4,6 @@ import { MediaProvider } from '../../providers/media/media';
 import { LoginPage } from '../login/login';
 import { MenuPage } from '../menu/menu';
 
-/**
- * Generated class for the LogoutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -27,14 +21,15 @@ export class LogoutPage {
 
 
   public logout(){
+   // localStorage.removeItem('token');
 
-    this.navCtrl.setRoot(LoginPage);
-
-    localStorage.removeItem('token');
+    localStorage.clear();
     console.log('logout token ' + localStorage.getItem('token'));
-    this.mediaProvider.token = localStorage.getItem('token');
-    this.mediaProvider.hasLoggedIn = false;
 
+    this.navCtrl.parent.select(0);
+    this.mediaProvider.hasLoggedIn = false;
+    //this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.popToRoot();
   }
 
 
