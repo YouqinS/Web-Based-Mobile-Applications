@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   IonicPage,
   Loading,
@@ -31,11 +31,23 @@ export class LoginPage {
     //console.log('ionViewDidLoad LoginPage');
   }
 
+
+  public confirm_password: any;
+  @ViewChild('registerForm') registerForm: any;
+
+
+
   public showRegisterForm:Boolean = false;
   public createAccount() {
     //this.navCtrl.push('RegisterPage');
     this.showRegisterForm = true;
     console.log('show register form');
+  }
+  showLoginForm() {
+    console.log('show login form');
+    if(this.showRegisterForm == true){
+      this.showRegisterForm = false
+    }
   }
 
 
@@ -110,6 +122,13 @@ public checkUsername(){
       }
     })
 }
+
+
+  public verifyPassword(){
+    if(this.user.password !== this.confirm_password){
+      alert('passwords do not match');
+    }
+  }
 
 
 }
