@@ -6,6 +6,7 @@ import { ProfilePage } from '../profile/profile';
 import { HomePage } from '../home/home';
 import { MediaProvider } from '../../providers/media/media';
 import { User } from '../../interfaces/user';
+import { UploadPage } from '../upload/upload';
 
 
 @IonicPage()
@@ -26,11 +27,12 @@ export class MenuPage {
   }
 
   ionViewDidLoad() {
+    console.log('ionViewDidLoad MenuPage');
+
     this.checkToken();
   }
 
   public checkToken(){
-      console.log('ionViewDidLoad MenuPage');
       console.log(localStorage.getItem('token'));
       if (localStorage.getItem('token') !== null) {
         this.mediaProvider.checkToken().subscribe((user: User) => {
@@ -39,7 +41,6 @@ export class MenuPage {
         });
       }
   }
-
 
 }
 

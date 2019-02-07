@@ -1,12 +1,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
+    <ion-buttons *ngIf="mediaProvider.hasLoggedIn">
+      <button (click)="goToUpload()" ion-button clear color="primary"> Upload <ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding >
 
   <ion-list>
 

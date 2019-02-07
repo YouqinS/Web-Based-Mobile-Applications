@@ -5,6 +5,7 @@ import { Pic, Thumbnail } from '../../interfaces/pic';
 import { MediaProvider } from '../../providers/media/media';
 import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs';
+import { UploadPage } from '../upload/upload';
 
 
 @Component({
@@ -24,7 +25,6 @@ export class HomePage {
 
   ngOnInit(){
     this.getAllFiles();
-
   }
 
 
@@ -36,6 +36,10 @@ export class HomePage {
 
   }
 
+
+  goToUpload(){
+    this.navCtrl.push(UploadPage).catch();
+  }
 
 //get thumbnail by requesting single file and push it to picArray
   /*  getAllFiles(){
