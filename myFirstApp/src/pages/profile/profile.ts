@@ -29,6 +29,8 @@ public logout(){
   localStorage.clear();
   this.mediaProvider.hasLoggedIn = false;
   this.navCtrl.parent.select(0);
+  //this.navCtrl.popToRoot();
+  //this.navCtrl.setRoot(LoginPage);
 
 }
 

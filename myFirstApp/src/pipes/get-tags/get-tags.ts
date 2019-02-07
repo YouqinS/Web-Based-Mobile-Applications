@@ -21,6 +21,7 @@ export class GetTagsPipe implements PipeTransform {
         files.forEach((file: Pic) => {
           if (file.user_id === this.mediaProvider.user.user_id) {
             profileFound = true;
+            console.log('profile found: ' + file.user_id + '/' + this.mediaProvider.user.user_id);
             resolve(file.file_id);
           }
           else {
