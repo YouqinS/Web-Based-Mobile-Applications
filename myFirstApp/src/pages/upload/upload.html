@@ -24,7 +24,7 @@
       <ion-label stacked>choose a media file</ion-label>
       <ion-input type="file"
                  accept="image/*, video/*, audio/*"
-                 placeholder="choose file to upload"
+                 placeholder="choose a media file to upload"
                  (change)="handleChange($event)"
       ></ion-input>
     </ion-item>
@@ -39,7 +39,11 @@
 
   <ion-card *ngIf="file">
     <img #preview [src]="filedata"
-         [ngStyle]="{'filter': 'brightness('+filters.brightness/100+') contrast('+filters.contrast/100+') saturate('+filters.saturation/100+') sepia('+filters.warmth/100+')'}">
+         [ngStyle]="{'filter': 'brightness('+filters.brightness/100+') ' +
+          'contrast('+filters.contrast/100+') ' +
+           'saturate('+filters.saturation/100+') ' +
+            'sepia('+filters.warmth/100+')'}">
+
     <div *ngIf="file.type.includes('image')">
 
       <ion-item>

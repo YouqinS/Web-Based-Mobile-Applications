@@ -102,6 +102,8 @@ public register(){
       if(response.hasOwnProperty('user_id')){
         console.log(this.user.user_id);
         this.login();
+
+        this.registerForm.reset();
       }
     },
     error => {
