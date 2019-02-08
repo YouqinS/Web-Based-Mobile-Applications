@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   IonicPage,
   LoadingController,
@@ -27,6 +27,7 @@ export class UploadPage {
   public myBlob: Blob;
   public isImage:Boolean = false;
   public hasFile:Boolean = false;
+  @ViewChild('uploadForm') uploadForm: any;
 
   filters = {
     brightness: 100,
@@ -141,7 +142,11 @@ export class UploadPage {
 
   }
 
-
-
+  cancelUpload() {
+    console.log('reset form');
+    this.uploadForm.reset();
+    this.filedata='';
+    this.isImage=false;
+  }
 }
 

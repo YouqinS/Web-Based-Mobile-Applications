@@ -34,11 +34,28 @@
     </ion-item>
 
     <!--use plugin chooser-->
-    <button ion-button type="button" (click)="chooseFile()">Choose file</button>
+    <button ion-button
+            type="button"
+            round
+            large
+            color="primary"
+            (click)="chooseFile()">Choose file</button>
 
     <ion-row>
-      <button type="submit" ion-button block [disabled]="!uploadForm.form.valid || !hasFile">Upload</button>
+      <button ion-button
+              type="submit"
+              round
+              large
+              color="secondary"
+              [disabled]="!uploadForm.form.valid || !hasFile">Upload</button >
     </ion-row>
+
+    <button ion-button
+            type="button"
+            large
+            round
+            color="danger"
+            (click)="cancelUpload()">Cancel</button>
 
   </form>
 
