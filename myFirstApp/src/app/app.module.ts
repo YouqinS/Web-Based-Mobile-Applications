@@ -18,6 +18,11 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { PipesModule } from '../pipes/pipes.module';
 import { UploadPage } from '../pages/upload/upload';
+// @ts-ignore
+//import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Chooser } from '@ionic-native/chooser';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,8 @@ import { UploadPage } from '../pages/upload/upload';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MediaProvider,
-
+    Camera,
+    Chooser,
 
   ]
 })

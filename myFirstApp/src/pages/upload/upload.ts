@@ -9,6 +9,10 @@ import {
 import { Pic } from '../../interfaces/pic';
 import { MediaProvider } from '../../providers/media/media';
 import { HomePage } from '../home/home';
+//import { FileChooser } from '@ionic-native/file-chooser';
+//import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { Chooser } from '@ionic-native/chooser';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @IonicPage()
 @Component({
@@ -18,9 +22,11 @@ import { HomePage } from '../home/home';
 export class UploadPage {
 
   filedata = '';
-  file: File;
   title = '';
   description = '';
+  public myBlob: Blob;
+  public isImage:Boolean = false;
+  public hasFile:Boolean = false;
 
   filters = {
     brightness: 100,
@@ -30,6 +36,8 @@ export class UploadPage {
   };
 
   constructor(
+    private camera: Camera,
+    private chooser: Chooser,
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
@@ -44,50 +52,57 @@ export class UploadPage {
     content: 'Uploading, please wait...',
   });
 
-  handleChange($event) {
-    // console.log($event.target.files);
-    // get the file from $event
-    this.file = $event.target.files[0];
-    // call showPreview
-    this.showPreview();
-  }
 
-  showPreview() {
-    // show selected image in img
+  showPreview(file) {
+
+    this.myBlob = new Blob(
+      [file.data], {
+        type: file.mediaType
+      });
+
     const reader = new FileReader();
-    reader.onloadend = (evt) => {
-      // console.log(reader.result);
-      this.filedata = reader.result;
-    };
+    reader.addEventListener("loadend", function() {
+      // reader.result contains the contents of blob as a typed array
+      reader.result;
+    });
+    reader.readAsArrayBuffer(this.myBlob);
+    console.log('myfile: ', this.myBlob);
 
-    if (this.file.type.includes('video')) {
+    if (file.mediaType.includes('video')) {
       this.filedata = 'http://via.placeholder.com/500X200/000?text=Video';
-    } else if (this.file.type.includes('audio')) {
+    } else if (file.mediaType.includes('audio')) {
       this.filedata = 'http://via.placeholder.com/500X200/000?text=Audio';
     } else {
-      reader.readAsDataURL(this.file);
+      this.filedata = file.dataURI;
+     // if(file.mediaType.includes('image')){}
+        this.isImage = true;
     }
 
   }
 
   public uploadMedia(){
 
-    //const description = `[d]${this.description}[/d]`;
-    const description = `${this.description}`;
-    //const filters = `[f]${JSON.stringify(this.filters)}[/f]`;
-    const filters = `${JSON.stringify(this.filters)}`;
+    const description = `[d]${this.description}[/d]`;
+    //const description = `${this.description}`;
+    const filters = `[f]${JSON.stringify(this.filters)}[/f]`;
+    //const filters = `${JSON.stringify(this.filters)}`;
 
     // show spinner
     this.loading.present().catch();
+
     const formData = new FormData();
     formData.append('title', this.title);
+    console.log('title: ', this.title);
+
     formData.append('description', description + filters);// + filters
-    formData.append('file', this.file);
+    console.log('description: ', description);
+
+    //formData.append('file', this.file);
+    formData.append('file', this.myBlob);
 
     this.mediaProvider.uploadMedia( formData).subscribe(response => {
 
       console.log('upload media response', response);
-
 
       // setTimeout 2. secs
       setTimeout(() => {
@@ -98,12 +113,35 @@ export class UploadPage {
 
       if(response.message ==="file uploaded"){
         // this.navCtrl.pop();
+        console.log('file uploaded');
         this.navCtrl.popTo(HomePage);
       }
 
     });
 
   }
+
+
+  public chooseFile(){
+    this.chooser.getFile("image/*, video/*, audio/*")
+    .then(file => {
+      if(file){
+        console.log(file ? file.name : 'canceled');
+        console.log(file.dataURI);
+        console.log(file.mediaType);
+        //console.log(file.uri);
+        this.hasFile = true;
+        this.showPreview(file);
+
+      }else {
+        alert("please choose a file to upload");
+      }
+    })
+    .catch((error: any) => console.error(error));
+
+  }
+
+
 
 }
 
