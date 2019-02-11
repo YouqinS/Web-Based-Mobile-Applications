@@ -20,8 +20,11 @@ import { PipesModule } from '../pipes/pipes.module';
 import { UploadPage } from '../pages/upload/upload';
 // @ts-ignore
 //import { Camera } from '@ionic-native/camera';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+//import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 import { Chooser } from '@ionic-native/chooser';
+import { CameraProvider } from '../providers/camera/camera';
 
 
 @NgModule({
@@ -56,6 +59,7 @@ import { Chooser } from '@ionic-native/chooser';
     MediaProvider,
     Camera,
     Chooser,
+    CameraProvider,
 
   ]
 })

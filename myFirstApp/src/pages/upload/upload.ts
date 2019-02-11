@@ -12,7 +12,7 @@ import { HomePage } from '../home/home';
 //import { FileChooser } from '@ionic-native/file-chooser';
 //import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { Chooser } from '@ionic-native/chooser';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -148,5 +148,8 @@ export class UploadPage {
     this.filedata='';
     this.isImage=false;
   }
+
+
+
 }
 

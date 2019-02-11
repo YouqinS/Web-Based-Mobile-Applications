@@ -44,7 +44,7 @@ export class ThumbnailPipe implements PipeTransform {
    //pure pipe, promise
     return new Promise((resolve, reject) => {
       this.mediaProvider.getSingleMedia(file_id).subscribe((response) =>{
-        console.log('getSingleMedia Res', response);
+        console.log('thumbnail pipe getSingleMedia Res: ', response);
 
         switch (args[0]) {
           case 'large': resolve(response.thumbnails.w640); break;

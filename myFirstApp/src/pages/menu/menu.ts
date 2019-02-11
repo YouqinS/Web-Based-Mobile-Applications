@@ -27,7 +27,7 @@ export class MenuPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuPage');
+    //console.log('ionViewDidLoad MenuPage');
 
     this.checkToken();
   }
@@ -37,7 +37,10 @@ export class MenuPage {
       if (localStorage.getItem('token') !== null) {
         this.mediaProvider.checkToken().subscribe((user: User) => {
           this.mediaProvider.user = user;
+          console.log(user.username + " / " + user.user_id);
           this.mediaProvider.hasLoggedIn = true;
+          //this.navCtrl.setRoot(HomePage);
+          //this.navCtrl.push(HomePage);
         });
       }
   }

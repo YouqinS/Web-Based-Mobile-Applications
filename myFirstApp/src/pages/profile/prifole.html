@@ -10,8 +10,6 @@
 
   <ion-content class="card-background-page">
 
-
-
     <ion-card>
       <img [src]="uploadUrl + ('profile' | getTags | async| thumbnail:'large' | async)"/>
 
@@ -31,17 +29,3 @@
     <button ion-button round default outline color="danger" item-start="end" (click)="logout()">Logout</button>
   </div>
 </ion-content>
-
-
-<!--<ion-nav [root]="rootPage"></ion-nav>-->
-<!--<ion-card>
-   <ion-item *ngFor="let pic of mediaArray | async">
-
-       <img [src]= "uploadUrl + (pic.file_id | getTags | avatar:'small'| async)" [alt]="pic.title" >&lt;!&ndash;pure pipe&ndash;&gt;
-
-
-   </ion-item>
-
-   <h2>username: {{username}}</h2>
-   <h2>email: {{email}}</h2>
- </ion-card>-->

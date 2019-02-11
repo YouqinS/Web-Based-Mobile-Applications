@@ -18,7 +18,6 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-
   }
 
   public uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';

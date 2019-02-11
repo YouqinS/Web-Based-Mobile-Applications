@@ -19,7 +19,7 @@ export class MediaProvider {
 
 
   getAllMedia(){
-   // const url:string = 'http://media.mw.metropolia.fi/wbma/media?start=10&limit=5';
+    //const url:string = 'http://media.mw.metropolia.fi/wbma/media?start=100&limit=5';
     const url:string = 'http://media.mw.metropolia.fi/wbma/media';
 
     return this.http.get<Pic[]>(url);
