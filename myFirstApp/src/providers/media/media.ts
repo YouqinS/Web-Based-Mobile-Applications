@@ -101,5 +101,23 @@ public checkUsername(username){
   }
 
 
+  //get all media of single user
+  /*public getAllMediaOfSingleUser(){
+    const userid = this.user.user_id;
+    console.log('user-id: ', this.user.user_id);
+
+    const allMediaOfSingleUserPath:string = "ttp://media.mw.metropolia.fi/wbma/media/user/"+userid;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    console.log('token: ', localStorage.getItem('token'));
+
+    return this.http.get<Pic[]>(allMediaOfSingleUserPath);
+  }*/
+
+
 }
 

@@ -6,6 +6,7 @@ import { MediaProvider } from '../../providers/media/media';
 import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs';
 import { UploadPage } from '../upload/upload';
+import { PlayerPage } from '../player/player';
 
 
 @Component({
@@ -15,29 +16,29 @@ import { UploadPage } from '../upload/upload';
 
 export class HomePage {
 
-  private picArray:Pic[] = [];
+  private picArray: Pic[] = [];
   public uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  public mediaArray:Observable<Pic[]>;
+  public mediaArray: Observable<Pic[]>;
 
-  constructor(public navCtrl: NavController, public http: HttpClient, private mediaProvider: MediaProvider) {
+  constructor(
+    public navCtrl: NavController, public http: HttpClient,
+    private mediaProvider: MediaProvider) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getAllFiles();
   }
 
-
 //using pipe
-  getAllFiles(){
+  getAllFiles() {
     this.mediaArray = this.mediaProvider.getAllMedia();
 
     // console.log(this.mediaArray);
 
   }
 
-
-  goToUpload(){
+  goToUpload() {
     this.navCtrl.push(UploadPage).catch();
   }
 
@@ -56,7 +57,6 @@ export class HomePage {
       })
   }*/
 
-
   //method 1: split
   /*private thumbnail: string;
     private mediaPath:string = "http://media.mw.metropolia.fi/wbma/uploads/";
@@ -71,7 +71,6 @@ export class HomePage {
         this.picArray = res;
       });
     }*/
-
 
 //method 2: split && map
   /*
@@ -92,7 +91,19 @@ export class HomePage {
     }
   */
 
+  showPhotoViewer(file_id: number) {
+    this.navCtrl.push(PlayerPage,{
+      file_id: file_id
+    })
 
+  }
+
+/*someFunction(param1, param2) {
+    this.navCtrl.push(SomePage, {
+      property1: param1,
+      property2: param2
+    });
+  }*/
 
 
 }

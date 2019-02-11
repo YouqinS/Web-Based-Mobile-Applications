@@ -25,6 +25,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { Chooser } from '@ionic-native/chooser';
 import { CameraProvider } from '../providers/camera/camera';
+import { PlayerPage } from '../pages/player/player';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CameraProvider } from '../providers/camera/camera';
     MenuPage,
     LoginPage,
     ProfilePage,
-    UploadPage
+    UploadPage,
+    PlayerPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { CameraProvider } from '../providers/camera/camera';
     MenuPage,
     ProfilePage,
     LoginPage,
-    UploadPage
+    UploadPage,
+    PlayerPage
   ],
   providers: [
     StatusBar,
