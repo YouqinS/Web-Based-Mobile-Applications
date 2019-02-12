@@ -17,7 +17,6 @@ export class MyFilesPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public mediaProvider: MediaProvider,
-              public toastCtrl: ToastController
               ) {
   }
 
@@ -64,8 +63,8 @@ export class MyFilesPage {
 
         this.mediaProvider.deleteFile(file_id).subscribe(deleteRes=>{
           console.log('delete file response: ', deleteRes);
-          this.presentToast(deleteRes.message);
-          this.navCtrl.push(MyFilesPage);
+          this.mediaProvider.presentToast(deleteRes.message);
+          //this.navCtrl.push(MyFilesPage);
         })
 
       } else {
@@ -75,13 +74,7 @@ export class MyFilesPage {
   }
 
 
-  presentToast(message) {
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    });
-    toast.present();
-  }
+
 
 
 }

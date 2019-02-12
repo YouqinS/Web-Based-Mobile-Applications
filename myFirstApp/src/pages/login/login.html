@@ -73,7 +73,7 @@
                    required ></ion-input>
         <div class="form-control-feedback"
              *ngIf="email.errors && (email.dirty || email.touched)">
-          <p *ngIf="email.errors">Email format: example@email.com</p>
+          <p *ngIf="email.errors">Email format: characters@characters.domain</p>
         </div>
 
       </div>
@@ -88,7 +88,8 @@
                    [(ngModel)]="user.password"
                    #password="ngModel"
                    required
-                   pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></ion-input>
+                   pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+        </ion-input>
         <div class="form-control-feedback"
              *ngIf="password.errors && (password.dirty || password.touched)">
           <p *ngIf="password.errors">Password needs to be at least 8 characters containing at least one number, one uppercase and lowercase letter</p>

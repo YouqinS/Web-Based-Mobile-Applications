@@ -19,12 +19,20 @@ export class ModifyPage {
   description = '';
   data: {};
   file_id;
-  @ViewChild('uploadForm') uploadForm: any;
+
+  @ViewChild('modifyForm') modifyForm: any;
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ModifyPage');
   }
 
+
+  isTitleLenghOK=false;
+  showErrorMsg(){
+    if(this.title.length>3 || this.title.length <20){
+      this.isTitleLenghOK = true;
+    }
+  }
 
   modifyFileInfo(){
 
@@ -57,6 +65,6 @@ export class ModifyPage {
 
   cancelModify() {
     console.log('reset form');
-    this.uploadForm.reset();
+    this.modifyForm.reset();
   }
 }

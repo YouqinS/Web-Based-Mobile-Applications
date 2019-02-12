@@ -6,7 +6,7 @@ import { User } from '../../interfaces/user';
 import { LoginPage } from '../../pages/login/login';
 import { observable } from 'rxjs/symbol/observable';
 import { LoginResponse } from '../../interfaces/loginResponse';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ToastController } from 'ionic-angular';
 
 @Injectable()
 export class MediaProvider {
@@ -15,7 +15,7 @@ export class MediaProvider {
   token: string;
   user:User = null;
 
-  constructor(public http: HttpClient, public alertController: AlertController) { }
+  constructor(public http: HttpClient, public alertController: AlertController, public toastCtrl: ToastController) { }
 
 
 
@@ -181,7 +181,13 @@ public checkUsername(username){
     return promise;
   }
 
-
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
 
 
 }

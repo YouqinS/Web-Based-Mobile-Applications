@@ -10,30 +10,43 @@
 
 <ion-content padding>
 
-  <form  #uploadForm="ngForm" (ngSubmit)="modifyFileInfo()">
-    <ion-item>
+  <form  #modifyForm="ngForm" (ngSubmit)="modifyFileInfo()" name="modifyForm" #modifyForm="ngForm" id="modifyForm">
+
+    <div class="form-group">
       <ion-label stacked>title</ion-label>
       <ion-input type="text"
-                 placeholder="title"
+                 class="form-control"
+                 placeholder="new title"
                  [(ngModel)]="title"
-                 name="title"
-                 required
+                 id="newtitle"
+                 name="newtitle"
+                 #newtitle="ngModel"
                  maxlength="20"
                  minlength="3">
       </ion-input>
-    </ion-item>
+      <div class="form-control-feedback"  *ngIf="newtitle.errors && (newtitle.dirty || newtitle.touched)">
+        <p *ngIf="newtitle.errors">title needs to be 3-20 characters</p>
+      </div>
+    </div>
 
-    <ion-item>
+    <div class="form-group">
       <ion-label stacked>description</ion-label>
       <ion-textarea type="text"
                     [(ngModel)]="description"
-                    placeholder="description"
-                    name="description"
-                    required
+                    class="form-control"
+                    placeholder="new description"
+                    name="newDescription"
+                    id="newDescription"
+                    #newDescription="ngModel"
                     minlength="10"
-                    maxlength="100"></ion-textarea>
-    </ion-item>
+                    maxlength="100">
 
+      </ion-textarea>
+      <div class="form-control-feedback"
+           *ngIf="newDescription.errors && (newDescription.dirty || newDescription.touched)">
+        <p *ngIf="newDescription.errors">description length needs to be 10-100 characters</p>
+      </div>
+    </div>
 
     <ion-row>
       <button ion-button
@@ -41,7 +54,7 @@
               round
               large
               color="secondary"
-              [disabled]="!uploadForm.form.valid">Modify</button >
+              [disabled]="!modifyForm.form.valid">Modify</button >
     </ion-row>
 
     <button ion-button
