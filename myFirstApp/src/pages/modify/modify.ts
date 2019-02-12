@@ -27,13 +27,6 @@ export class ModifyPage {
   }
 
 
-  isTitleLenghOK=false;
-  showErrorMsg(){
-    if(this.title.length>3 || this.title.length <20){
-      this.isTitleLenghOK = true;
-    }
-  }
-
   modifyFileInfo(){
 
     const description = `[d]${this.description}[/d]`;
