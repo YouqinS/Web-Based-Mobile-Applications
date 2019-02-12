@@ -19,6 +19,7 @@ export class PlayerPage {
   public uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   public file:Pic;
   public file_id;
+  public username;
   ionViewDidLoad() {
    // console.log('ionViewDidLoad PlayerPage');
   }
@@ -33,29 +34,21 @@ export class PlayerPage {
     console.log('file_id: ', this.file_id);
     this.mediaProvider.getSingleMedia(this.file_id).subscribe(singleMedia =>{
 
-      console.log('view single media: ' + singleMedia);
+      console.log('view single media: ', singleMedia);
 
       this.file = singleMedia;
+      console.log('media type: ', this.file.media_type);
+      console.log('user id: ', this.file.user_id);
+      console.log('file description: ', this.file.description);
 
+      this.mediaProvider.getUserInfoOfSingleFile(this.file.user_id).subscribe(userInfo=>{
+        console.log('single media user info: ', userInfo);
 
-    })
+        this.username = userInfo.username;
+
+    });
+  })
   }
-
-  //method 1: split
-  private thumbnail: string;
-    private mediaPath:string = "http://media.mw.metropolia.fi/wbma/uploads/";
-    public getThumbnail(filename){
-    return this.thumbnail = this.mediaPath + filename.split(".",1) + "-tn160.png";
-    //console.log("thumbnail: " + this.thumbnail);
-  }
-
-
-  /*getAllMediaOfCurrentUser(){
-    this.mediaArray = this.mediaProvider.getAllMediaOfSingleUser();
-
-     console.log(this.mediaArray);
-
-  }*/
 
 
 

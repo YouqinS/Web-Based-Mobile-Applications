@@ -6,6 +6,7 @@ import { MenuPage } from '../menu/menu';
 import { User } from '../../interfaces/user';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/pic';
+import { MyFilesPage } from '../my-files/my-files';
 
 @IonicPage()
 @Component({
@@ -23,6 +24,9 @@ export class ProfilePage {
   public uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 
+  goToMyFiles() {
+    this.navCtrl.push(MyFilesPage).catch();
+  }
 
 public logout(){
 

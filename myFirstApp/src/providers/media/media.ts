@@ -20,16 +20,46 @@ export class MediaProvider {
 
   getAllMedia(){
     //const url:string = 'http://media.mw.metropolia.fi/wbma/media?start=100&limit=5';
-    const url:string = 'http://media.mw.metropolia.fi/wbma/media';
+    const mediaPath:string = 'http://media.mw.metropolia.fi/wbma/media';
 
-    return this.http.get<Pic[]>(url);
+    return this.http.get<Pic[]>(mediaPath);
   }
+
+
+  //get all media of current user
+  public getAllMediaOfCurrentUser(user_id){
+    const allMediaOfSingleUserPath:string = "http://media.mw.metropolia.fi/wbma/media/user/"+user_id;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+
+    console.log('token: ', localStorage.getItem('token'));
+
+    return this.http.get<Pic[]>(allMediaOfSingleUserPath);
+  }
+
 
 
   getSingleMedia(id){
     const mediaURL:string = "http://media.mw.metropolia.fi/wbma/media/"+id;
    // console.log( "medial url : " + mediaURL );
     return  this.http.get<Pic>(mediaURL);
+
+  }
+
+
+  getUserInfoOfSingleFile(user_id){
+    const userInfoPath:string = "http://media.mw.metropolia.fi/wbma/users/"+user_id;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      })
+    };
+    return this.http.get<User>(userInfoPath, httpOptions);
 
   }
 
@@ -92,7 +122,6 @@ public checkUsername(username){
 
     const httpOptions = {
       headers: new HttpHeaders({
-        //'Content-type': 'application/json',
         'x-access-token': accessToken
       }),
     };
@@ -101,22 +130,24 @@ public checkUsername(username){
   }
 
 
-  //get all media of single user
-  /*public getAllMediaOfSingleUser(){
-    const userid = this.user.user_id;
-    console.log('user-id: ', this.user.user_id);
+  modifyFile(file_id, data:any){
+    console.log('modify media ?');
 
-    const allMediaOfSingleUserPath:string = "ttp://media.mw.metropolia.fi/wbma/media/user/"+userid;
+    const modifyFilePath:string = "http://media.mw.metropolia.fi/wbma/media/"+file_id;
+    let accessToken = localStorage.getItem('token');
+    console.log('accessToken: ', accessToken);
+
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token'),
+        'Content-type': 'application/json',
+        'x-access-token': accessToken
       }),
     };
-    console.log('token: ', localStorage.getItem('token'));
+    return this.http.put<LoginResponse>(modifyFilePath, data, httpOptions);
 
-    return this.http.get<Pic[]>(allMediaOfSingleUserPath);
-  }*/
+  }
+
+
 
 
 }

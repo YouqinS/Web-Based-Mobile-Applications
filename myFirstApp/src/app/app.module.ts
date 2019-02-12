@@ -26,6 +26,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Chooser } from '@ionic-native/chooser';
 import { CameraProvider } from '../providers/camera/camera';
 import { PlayerPage } from '../pages/player/player';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
+import { MyFilesPage } from '../pages/my-files/my-files';
+import { ModifyPage } from '../pages/modify/modify';
+
 
 
 @NgModule({
@@ -36,13 +40,17 @@ import { PlayerPage } from '../pages/player/player';
     LoginPage,
     ProfilePage,
     UploadPage,
-    PlayerPage
+    PlayerPage,
+    MyFilesPage,
+    ModifyPage
+
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    PipesModule
+    PipesModule,
+    PinchZoomModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +60,9 @@ import { PlayerPage } from '../pages/player/player';
     ProfilePage,
     LoginPage,
     UploadPage,
-    PlayerPage
+    PlayerPage,
+    MyFilesPage,
+    ModifyPage
   ],
   providers: [
     StatusBar,

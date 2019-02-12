@@ -7,6 +7,7 @@ import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs';
 import { UploadPage } from '../upload/upload';
 import { PlayerPage } from '../player/player';
+import { MyFilesPage } from '../my-files/my-files';
 
 
 @Component({
@@ -105,5 +106,7 @@ export class HomePage {
     });
   }*/
 
-
+  goToMyFiles() {
+    this.navCtrl.push(MyFilesPage).catch();
+  }
 }

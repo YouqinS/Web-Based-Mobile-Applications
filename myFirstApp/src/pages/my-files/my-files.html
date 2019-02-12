@@ -1,21 +1,19 @@
-<ion-header>
-  <ion-navbar>
-    <!--<ion-title>
-      Home
-    </ion-title>-->
+<!--
+  Generated template for the MyFilesPage page.
 
-    <ion-row>
-    <ion-buttons *ngIf="mediaProvider.hasLoggedIn">
-      <button (click)="goToUpload()" ion-button solid color="secondary"> Upload </button>
-    </ion-buttons>
-    <ion-buttons *ngIf="mediaProvider.hasLoggedIn">
-      <button (click)="goToMyFiles()" ion-button solid color="primary"> My Files </button>
-    </ion-buttons>
-    </ion-row>
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>my-files</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding >
+
+<ion-content padding>
 
   <ion-list>
 
@@ -31,10 +29,12 @@
       <p>{{pic.time_added | date: ('dd.MM.yy')}}</p>  <!--MM: month mm: minuit-->
       <p>{{pic.description}}</p>
 
-      <button ion-button clear item-end (click)="showPhotoViewer(pic.file_id)">View</button>
+      <button ion-button   (click)="showPhotoViewer(pic.file_id)">View</button>
+      <button ion-button  color="secondary" (click)="goToModifyPage(pic.file_id)">Modify</button>
+      <button ion-button  color="danger" (click)="deleteFile(pic.file_id)">Delete</button>
+
     </ion-item>
 
   </ion-list>
-
 
 </ion-content>
