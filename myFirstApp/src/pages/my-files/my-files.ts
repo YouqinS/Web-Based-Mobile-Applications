@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/pic';
 import { PlayerPage } from '../player/player';
 import { ModifyPage } from '../modify/modify';
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,11 @@ import { ModifyPage } from '../modify/modify';
 })
 export class MyFilesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public mediaProvider: MediaProvider,
+              public toastCtrl: ToastController
+              ) {
   }
 
   public uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -52,7 +57,31 @@ export class MyFilesPage {
     })
   }
 
-  deleteFile(file_id: number) {
 
+  deleteFile(file_id: number) {
+    this.mediaProvider.confirmationAlert('Do you really want to delete the file?').then(confirm => {
+      if (confirm) {
+
+        this.mediaProvider.deleteFile(file_id).subscribe(deleteRes=>{
+          console.log('delete file response: ', deleteRes);
+          this.presentToast(deleteRes.message);
+          this.navCtrl.push(MyFilesPage);
+        })
+
+      } else {
+        console.log('Canceled');
+      }
+    })
   }
+
+
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
+
 }

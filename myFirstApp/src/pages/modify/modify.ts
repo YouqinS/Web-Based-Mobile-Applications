@@ -46,7 +46,9 @@ export class ModifyPage {
       if(response.message ==="File info updated"){
         // this.navCtrl.pop();
         console.log('File info updated');
-        this.navCtrl.popTo(MyFilesPage);
+        alert('File info updated');
+        //this.navCtrl.popTo(MyFilesPage);
+        this.navCtrl.push(MyFilesPage);
       }
 
     });
